@@ -235,7 +235,6 @@ public class SystemAndGLInfo
         gpuInfoList = new ArrayList();
         if(isMobileSoc)
         {
-            initMobileGPUPathNumberToGPUNameMap();
             CentralProcessor processor = infoHardware.getProcessor();
 
             String GPUPartNumber = processor.getProcessorIdentifier().getName();
@@ -483,13 +482,18 @@ public class SystemAndGLInfo
     {
         systemInfo = new SystemInfo();
         infoHardware = systemInfo.getHardware();
-        initmobileSocPathNumberToSocNameMap();
+        CompletableFuture.runAsync(() ->
+        {
+            initmobileSocPathNumberToSocNameMap();
+        });
+        CompletableFuture.runAsync(() ->
+        {
+            initMobileGPUPathNumberToGPUNameMap();
+        });
         initCPUInfo();
         initGPUInfo();
         initMemoryInfo();
-        /*CompletableFuture.runAsync(() -> {
 
-        });*/
     }
 
     private String getMobileSocNameWithPathNumber(String pathNumber)
@@ -570,7 +574,7 @@ public class SystemAndGLInfo
         return false;
     }
 
-    public boolean isKnownAndroidPathFragment(String path) {
+    private boolean isKnownAndroidPathFragment(String path) {
         return path.matches("/data/user/[0-9]+/net\\.kdt\\.pojavlaunch");
     }
 
