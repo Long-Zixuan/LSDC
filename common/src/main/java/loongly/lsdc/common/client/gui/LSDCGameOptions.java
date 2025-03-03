@@ -15,7 +15,7 @@ import java.nio.file.Path;
 
 public class LSDCGameOptions {
 
-    private static final String DEFAULT_FILE_NAME = "sodium-shadowy-path-blocks-options.json";
+    private static final String DEFAULT_FILE_NAME = "lzx-sodium-device-check-options.json";
     private static final Gson GSON = new GsonBuilder()
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .setPrettyPrinting()
@@ -23,39 +23,11 @@ public class LSDCGameOptions {
             .create();
     private Path configPath;
 
-    public int shadowynessPercent; // only used so the slider in the options can display the value as a proper percentage
-    private float shadowyness;
-    private float shadowynessCompliment;
 
-    public boolean onlyAffectPathBlocks;
-
-    public boolean vanillaPathBlockLighting;
 
 
     public LSDCGameOptions(){
-        shadowynessPercent = 85;
-        shadowyness = 0.85f;
-        shadowynessCompliment = 0.15f;
 
-        onlyAffectPathBlocks = false;
-
-        vanillaPathBlockLighting = false;
-    }
-
-
-    public void updateShadowyness(int shadowynessPercent){
-        this.shadowynessPercent = shadowynessPercent;
-
-        shadowyness = shadowynessPercent/100f;
-        shadowynessCompliment = 1 - (shadowynessPercent/100f);
-    }
-
-    public float getShadowyness(){
-        return shadowyness;
-    }
-
-    public float getShadowynessCompliment(){
-        return shadowynessCompliment;
     }
 
     public static LSDCGameOptions load() {
@@ -67,7 +39,7 @@ public class LSDCGameOptions {
                 config = GSON.fromJson(reader, LSDCGameOptions.class);
             }
             catch (IOException e) {
-                throw new RuntimeException("Could not parse SSPB config", e);
+                throw new RuntimeException("Could not parse LSDC config", e);
             }
         }
         else {
@@ -80,7 +52,7 @@ public class LSDCGameOptions {
             config.writeChanges();
         }
         catch (IOException e) {
-            throw new RuntimeException("Couldn't update SSPB config", e);
+            throw new RuntimeException("Couldn't update LSDC config", e);
         }
 
         return config;
