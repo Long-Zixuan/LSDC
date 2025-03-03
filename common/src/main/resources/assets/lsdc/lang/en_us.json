@@ -84,5 +84,12 @@
   "sodium.memoryInfo.size": "Memory Size",
   "sodium.memoryInfo.clockSpeed": "Clock Speed",
   "sodium.memoryInfo.jvmTol": "JVM Total Memory",
-  "sodium.options.pages.memoryInfo": "Memory Info"
+  "sodium.options.pages.memoryInfo": "Memory Info",
+  "sodium.options.pages.sysinfo":  "OS Info",
+  "sodium.options.pages.sysname":  "OS Name",
+  "sodium.options.pages.glinfo":"OpenGL Info",
+  "sodium.options.pages.glversion":"OpenGL Version",
+  "sodium.options.pages.lsdc":  "Device Info",
+  "sodium.options.pages.jdkinfo": "Java Info",
+  "sodium.options.pages.jdkversion": "Java Version"
 }

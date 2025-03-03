@@ -20,7 +20,7 @@ public class LSDCClientMod {
 
 	public static void onInitClient() {
 		CONFIG = LSDCGameOptions.load();
-		
+
 		LOGGER.info("Init LSDC Config");
 	}
 

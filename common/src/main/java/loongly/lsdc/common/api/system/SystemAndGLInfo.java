@@ -403,7 +403,7 @@ public class SystemAndGLInfo
 
     void initmobileSocPathNumberToSocNameMap()
     {
-        String jsonFilePath = "/assets/lzx_sodium_device_check/soc_map/MobileSocPathNumberToName.json";
+        String jsonFilePath = "/assets/lsdc/soc_map/MobileSocPathNumberToName.json";
         // ObjectMapper objectMapper = new ObjectMapper();
         try (InputStream inputStream = this.getClass().getResourceAsStream(jsonFilePath)) {
             if (inputStream == null) {
@@ -442,7 +442,7 @@ public class SystemAndGLInfo
 
     void initMobileGPUPathNumberToGPUNameMap()
     {
-        String jsonFilePath = "/assets/lzx_sodium_device_check/soc_map/MobileGPUPathNumberToName.json";
+        String jsonFilePath = "/assets/lsdc/soc_map/MobileGPUPathNumberToName.json";
         // ObjectMapper objectMapper = new ObjectMapper();
         try (InputStream inputStream = this.getClass().getResourceAsStream(jsonFilePath)) {
             if (inputStream == null) {
@@ -510,6 +510,11 @@ public class SystemAndGLInfo
         }
         isMobileSoc = false;
         return pathNumber;
+    }
+
+    public String getJDKVersion()
+    {
+        return System.getProperty("java.version");
     }
 
     public String getGLVersion()

@@ -24,8 +24,6 @@ public abstract class SodiumOptionsGUIMixin {
 
     @Inject(method = "<init>*", at = @At("TAIL"))
     private void addSSPBOptionPage(CallbackInfo ci){
-        this.pages.add(LSDCGameOptionPages.cpuInfo());
-        this.pages.add(LSDCGameOptionPages.gpuInfo());
-        this.pages.add(LSDCGameOptionPages.memoryInfo());
+        this.pages.add(LSDCGameOptionPages.lsdc());
     }
 }

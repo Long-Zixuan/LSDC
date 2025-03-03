@@ -84,6 +84,13 @@
   "sodium.memoryInfo.size": "記憶體大小",
   "sodium.memoryInfo.clockSpeed": "時鐘速度",
   "sodium.memoryInfo.jvmTol":"JVM總記憶體",
-  "sodium.options.pages.memoryInfo": "記憶體資訊"
+  "sodium.options.pages.memoryInfo": "記憶體資訊",
+  "sodium.options.pages.sysinfo":  "作業系統資訊",
+  "sodium.options.pages.sysname":  "作業系統名稱",
+  "sodium.options.pages.glinfo":"OpenGL資訊",
+  "sodium.options.pages.glversion":"OpenGL版本",
+  "sodium.options.pages.lsdc":  "設備資訊",
+  "sodium.options.pages.jdkinfo": "Java資訊",
+  "sodium.options.pages.jdkversion": "Java版本"
   }
   
