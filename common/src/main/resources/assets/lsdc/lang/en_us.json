@@ -91,5 +91,7 @@
   "sodium.options.pages.glversion":"OpenGL Version",
   "sodium.options.pages.lsdc":  "Device Info",
   "sodium.options.pages.jdkinfo": "Java Info",
-  "sodium.options.pages.jdkversion": "Java Version"
+  "sodium.options.pages.jdkversion": "Java Version",
+  "sodium.options.pages.simpleUI": "Enable simplified UI",
+  "sodium.options.pages.simpleUITooltip": "If you have installed the \"Sodium Extra\" or \"Reese's Sodium Options\" modules, you can enable this option. If you have not installed the above modules, the information will not be fully displayed after enabling this option. This option will take effect when this interface is reopened"
 }

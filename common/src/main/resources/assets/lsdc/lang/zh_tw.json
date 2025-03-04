@@ -91,6 +91,8 @@
   "sodium.options.pages.glversion":"OpenGL版本",
   "sodium.options.pages.lsdc":  "設備資訊",
   "sodium.options.pages.jdkinfo": "Java資訊",
-  "sodium.options.pages.jdkversion": "Java版本"
+  "sodium.options.pages.jdkversion": "Java版本",
+  "sodium.options.pages.simpleUI": "啟用簡化的UI",
+  "sodium.options.pages.simpleUITooltip": "如果您安裝了“Sodium Extra”或者“Reese's Sodium Options”Mod，則可以開啟此選項，如果未安裝上述模組，開啟此選項後資訊將無法完全顯示。 該選項將在重新開啟此介面時生效"
   }
   

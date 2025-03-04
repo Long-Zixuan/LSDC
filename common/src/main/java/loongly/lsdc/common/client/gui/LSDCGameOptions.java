@@ -23,6 +23,8 @@ public class LSDCGameOptions {
             .create();
     private Path configPath;
 
+    public boolean isSimpUI;
+
 
 
 

@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import loongly.lsdc.common.client.gui.LSDCGameOptionPages;
+import loongly.lsdc.common.client.LSDCClientMod;
 
 import java.util.List;
 
@@ -23,7 +24,18 @@ public abstract class SodiumOptionsGUIMixin {
 
 
     @Inject(method = "<init>*", at = @At("TAIL"))
-    private void addSSPBOptionPage(CallbackInfo ci){
-        this.pages.add(LSDCGameOptionPages.lsdc());
+    private void addSSPBOptionPage(CallbackInfo ci)
+    {
+        if(!LSDCClientMod.options().isSimpUI)
+        {
+            this.pages.add(LSDCGameOptionPages.softInfo());
+            this.pages.add(LSDCGameOptionPages.cpuInfo());
+            this.pages.add(LSDCGameOptionPages.gpuInfo());
+            this.pages.add(LSDCGameOptionPages.memoryInfo());
+        }
+        else
+        {
+            this.pages.add(LSDCGameOptionPages.lsdc());
+        }
     }
 }
