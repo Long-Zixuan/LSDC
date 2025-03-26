@@ -1,23 +1,23 @@
-# Sodium Shadowy Path Blocks
+![LoongLy Software](https://gitee.com/zixuan_long/Img/raw/master/LS3.png)
+<center class="half">
+<img src="https://gitee.com/zixuan_long/Img/raw/master/Support%20fabric.png" width="300">
+<img src="https://gitee.com/zixuan_long/Img/raw/master/support%20neoforge.png" width="350">
+</center>
 
-Sodium Shadowy Path Blocks (or SSPB for short) reintroduces vanilla-like smooth lighting to all non-fluid blocks with inset faces (e.g. dirt paths and how they have dark shading when directly next to a full block) when using Sodium, as Sodium removes this (or rather, fixes this, as it's technically a bug).
+# English
+Sodium Device Check is an auxiliary module for sodium. Please install the Sodium before installation  
+The functions are as follows  
+1. View platform information (processor information, operating system information, and memory information) as a reference for adjusting image quality  
+2. Supports Simplified Chinese and Traditional Chinese  
+Compatible with MC version 1.21. X and sodium version 0.6. X  
+Compatible with Fabric and Neoforge  
+![info page](https://cdn.modrinth.com/data/cached_images/107508a868a78d71887ebf51e6c8e0fdb2a51816.jpeg)![CPU info page](https://cdn.modrinth.com/data/cached_images/f520ef0445614c42680b650ba229d02d9067b5b1.jpeg)![GPU info page](https://cdn.modrinth.com/data/cached_images/644bea087d741f95fe8461e0db51d7b5d6ec8a89.jpeg)![Memory info page](https://cdn.modrinth.com/data/cached_images/c503c9c4e4c2468436288d33d47690bd71c97f2f.jpeg)
+![logo](https://cdn.modrinth.com/data/cached_images/56d7605130598ee2b052956b6f409fb175695165_0.webp)
 
-The strength of this shading is also adjustable (except for path blocks when "Use vanilla lighting for path blocks" is on).
-
-Unless "Use vanilla lighting for path blocks" is enabled, this lighting will not be exactly the same as vanilla, only vanilla-like, as the way I'm doing this is entirely based on Sodium's smooth lighting code.
-
-Requires [Sodium](https://github.com/CaffeineMC/sodium-fabric). If using the "Use vanilla lighting for path blocks" option on a version before 4.x.x, also requires [Indium](https://github.com/comp500/Indium) and [Fabric API](https://github.com/FabricMC/fabric) (or [Quilted Fabric API](https://github.com/QuiltMC/quilted-fabric-api) if using Quilt).
-
-# Download
-
-(More info avaliable on CurseForge and Modrinth)
-
-### [CurseForge](https://www.curseforge.com/minecraft/mc-mods/sodium-shadowy-path-blocks)
-
-### [Modrinth](https://modrinth.com/mod/sodium-shadowy-path-blocks)
-
-### [GitHub](https://github.com/Rynnavinx/sodium-shadowy-path-blocks/releases)
-
-# License
-
-Sodium Shadowy Path Blocks is licensed under GNU LGPLv3, a free and open-source license. For more information, please see the [license file](https://github.com/Rynnavinx/sodium-shadowy-path-blocks/blob/1.17.x/LICENSE.txt).
+# 中文
+钠-设备检测是钠的附属模组，安装前请先安装钠模组（Sodium）  
+功能如下  
+1.查看平台信息(处理器信息和操作系统信息以及内存信息)以作为调节画质时的参考  
+2.支持简体中文以及繁体中文  
+兼容MC版本1.21.X以及钠版本0.6.X  
+兼容Fabric和Neoforge  
