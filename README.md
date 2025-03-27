@@ -1,7 +1,7 @@
 ![LoongLy Software](https://gitee.com/zixuan_long/Img/raw/master/LS3.png)
 <center class="half">
-<img src="https://gitee.com/zixuan_long/Img/raw/master/Support_fabric2.png" width="30%">
-<img src="https://gitee.com/zixuan_long/Img/raw/master/support_neoforge2.png" width="35%">
+<img src="https://gitee.com/zixuan_long/Img/raw/master/Support_fabric3.png" width="40%">
+<img src="https://gitee.com/zixuan_long/Img/raw/master/support_neoforge3.png" width="47%">
 </center>
 
 # English
