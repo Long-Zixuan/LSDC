@@ -11,6 +11,12 @@ The functions are as follows
 2. Supports Simplified Chinese and Traditional Chinese  
 Compatible with MC version 1.21. X and sodium version 0.6. X  
 Compatible with Fabric and Neoforge  
+<br>
+<br>
+<p>If you like this mod,please buy me a coffee,THANKS!</p>
+<a href="https://ko-fi.com/loongly">
+    <img src="https://gitee.com/zixuan_long/Img/raw/master/buy_me_coffee.png" width="25%">
+</a>
   
 # 钠-设备检测
 钠-设备检测是钠的附属模组，安装前请先安装钠模组（Sodium）  
@@ -19,6 +25,13 @@ Compatible with Fabric and Neoforge
 2.支持简体中文以及繁体中文  
 兼容MC版本1.21.X以及钠版本0.6.X  
 兼容Fabric和Neoforge  
+<br>
+<br>
+<p>如果你喜欢这个模组，可以请我喝杯咖啡吗？谢谢！</p>
+<a href="https://ko-fi.com/loongly">
+    <img src="https://gitee.com/zixuan_long/Img/raw/master/buy_me_coffee.png" width="25%">
+</a>
+ 
 ![info page](https://cdn.modrinth.com/data/cached_images/107508a868a78d71887ebf51e6c8e0fdb2a51816.jpeg)![CPU info page](https://cdn.modrinth.com/data/cached_images/f520ef0445614c42680b650ba229d02d9067b5b1.jpeg)![GPU info page](https://cdn.modrinth.com/data/cached_images/644bea087d741f95fe8461e0db51d7b5d6ec8a89.jpeg)![Memory info page](https://cdn.modrinth.com/data/cached_images/c503c9c4e4c2468436288d33d47690bd71c97f2f.jpeg)
 ![logo](https://cdn.modrinth.com/data/cached_images/56d7605130598ee2b052956b6f409fb175695165_0.webp)
 
