@@ -1,4 +1,4 @@
-![LoongLy Software](https://gitee.com/zixuan_long/Img/raw/master/LS3.png)
+![LoongLy Software](https://gitee.com/zixuan_long/Img/raw/master/LS3_LOW_PIX.png)
 <center class="half">
 <img src="https://gitee.com/zixuan_long/Img/raw/master/Support_fabric3.png" width="40%">
 <img src="https://gitee.com/zixuan_long/Img/raw/master/support_neoforge3.png" width="47%">
