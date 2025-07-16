@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "loongly.lsdc.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "sodium.MixinSodiumOptionsGUI"
+
+  ],
+  "plugin": "loongly.lsdc.mixin.LSDCMixinPlugin",
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

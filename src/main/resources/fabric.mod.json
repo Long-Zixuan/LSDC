@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "lsdc",
+  "version": "${version}",
+
+  "name": "Sodium Device Check",
+  "description": "Sodium Device Check（钠-设备检测）",
+  "authors": [
+    "LoongLy"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Long-Zixuan/LSDC",
+    "sources": "https://github.com/Long-Zixuan/LSDC"
+  },
+
+  "license": "LGPLv3",
+  "icon": "assets/lsdc/icon.png",
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "loongly.lsdc.client.LSDCClientMod"
+    ]
+  },
+  "custom": {
+    "modmenu": {
+      "parent": {
+        "id": "sodium"
+      }
+    }
+  },
+  "mixins": [
+    "lsdc.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.12.10",
+    "java": ">=8",
+
+    "sodium": [
+      "0.1.x",
+      "0.2.x"
+    ]
+  },
+
+  "suggests": {
+    "reeses-sodium-options": "*"
+  },
+
+  "conflicts": {
+    "lambdabettergrass": "*"
+  }
+}
