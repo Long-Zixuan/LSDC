@@ -1,39 +1,36 @@
 ![LoongLy Software](https://gitee.com/zixuan_long/Img/raw/master/LS3_LOW_PIX.png)
 <center class="half">
-  <img src="https://gitee.com/zixuan_long/Img/raw/master/Support_fabric3.png" width="40%">
+<img src="https://gitee.com/zixuan_long/Img/raw/master/Support_fabric3.png" width="40%">
 </center>
 
-# 钠模组的汉化模组
-
-安装钠模组后安装此模组即可汉化模组
-支持简体中文和繁体中文  
-特别鸣谢law4x
+# Sodium Device Check
+Sodium Device Check is an auxiliary module for sodium. Please install the Sodium before installation  
+The functions are as follows  
+1. View platform information (processor information, operating system information, and memory information) as a reference for adjusting image quality  
+2. Supports Simplified Chinese and Traditional Chinese  
+Compatible with MC version 1.21. X and sodium version 0.6. X  
+Compatible with Fabric and Neoforge  
 <br>
-<p>如果你觉得这个汉化包不错的话，能否请我喝杯咖啡？感激不尽！</p>
+<br>
+<p>If you like this mod,please buy me a coffee,THANKS!</p>
 <a href="https://ko-fi.com/loongly">
     <img src="https://gitee.com/zixuan_long/Img/raw/master/buy_me_coffee.png" width="25%">
 </a>
-
-# 鈉模組漢化模组
-
-安裝鈉模組後安裝此模组即可漢化模組
-支持簡體中文和繁體中文  
-特別鳴謝law4x  
+  
+# 钠-设备检测
+钠-设备检测是钠的附属模组，安装前请先安装钠模组（Sodium）  
+功能如下  
+1.查看平台信息(处理器信息和操作系统信息以及内存信息)以作为调节画质时的参考  
+2.支持简体中文以及繁体中文  
+兼容MC版本1.21.X以及钠版本0.6.X  
+兼容Fabric和Neoforge  
 <br>
-<p>如果你觉得这个汉化包不错的话，能否请我喝杯咖啡？感激不尽！</p>
+<br>
+<p>如果你喜欢这个模组，可以请我喝杯咖啡吗？谢谢！</p>
 <a href="https://ko-fi.com/loongly">
     <img src="https://gitee.com/zixuan_long/Img/raw/master/buy_me_coffee.png" width="25%">
 </a>
-
-# Sodium Chinese localization mod
-
-After installing the sodium mod, install this mod to localize the modulee）  
-Supports Simplified Chinese and Traditional Chinese  
-Special thanks to Law4x
-
-# 1.16.3-1.16.5
-![img](https://cdn.modrinth.com/data/cached_images/80eabb485449aebb4bbca0a8d90b07f6b8f0887e.png)
-![img5](https://cdn.modrinth.com/data/cached_images/f7b3cb4e9cd9df0bf4c5d597ba8e4e5d28674698.jpeg)
-![img8](https://cdn.modrinth.com/data/cached_images/2ef651e75c15e6975b1e12e392154691f2296ae3.jpeg)
-
+ 
+![info page](https://cdn.modrinth.com/data/cached_images/107508a868a78d71887ebf51e6c8e0fdb2a51816.jpeg)![CPU info page](https://cdn.modrinth.com/data/cached_images/f520ef0445614c42680b650ba229d02d9067b5b1.jpeg)![GPU info page](https://cdn.modrinth.com/data/cached_images/644bea087d741f95fe8461e0db51d7b5d6ec8a89.jpeg)![Memory info page](https://cdn.modrinth.com/data/cached_images/c503c9c4e4c2468436288d33d47690bd71c97f2f.jpeg)
+![logo](https://cdn.modrinth.com/data/cached_images/56d7605130598ee2b052956b6f409fb175695165_0.webp)
 
