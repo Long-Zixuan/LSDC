@@ -4,8 +4,9 @@
   "package": "loongly.lsdc.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+  ],
+  "client": [
     "sodium.MixinSodiumOptionsGUI"
-
   ],
   "plugin": "loongly.lsdc.mixin.LSDCMixinPlugin",
   "injectors": {

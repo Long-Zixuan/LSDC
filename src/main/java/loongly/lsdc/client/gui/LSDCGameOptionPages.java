@@ -27,7 +27,7 @@ public class LSDCGameOptionPages
     {
         List<OptionGroup> groups = new ArrayList<>();
         initCPUInfoPage(groups);
-        return new OptionPage("Cpu Info", ImmutableList.copyOf(groups));
+        return new OptionPage("CPU Info", ImmutableList.copyOf(groups));
     }
 
 
