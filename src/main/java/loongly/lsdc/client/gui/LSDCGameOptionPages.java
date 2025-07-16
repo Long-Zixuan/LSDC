@@ -67,7 +67,7 @@ public class LSDCGameOptionPages
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(String.format("%.2f",SystemAndGLInfo.getInstance().cpuInfo.getFrequency()) + "GHz")
+                        .setName(String.format( "%.2f",(float)SystemAndGLInfo.getInstance().cpuInfo.getFrequency() / 1000000000.0f) + "GHz")
                         .setTooltip("Frequency")
                         .setControl(TickBoxControl::new)
                         .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
