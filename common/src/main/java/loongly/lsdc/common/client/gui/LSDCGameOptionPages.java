@@ -28,6 +28,12 @@ public class LSDCGameOptionPages {
     public static OptionPage cpuInfo()
     {
         List<OptionGroup> groups = new ArrayList<>();
+        initCPUPages( groups);
+        return new OptionPage(Component.translatable("sodium.options.pages.cpuinfo"), ImmutableList.copyOf(groups));
+    }
+
+    static void initCPUPages(List<OptionGroup> groups)
+    {
         groups.add(OptionGroup.createBuilder()
                 .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
                         .setName(Component.translatable(SystemAndGLInfo.getInstance().cpuInfo.getName()))
@@ -62,7 +68,7 @@ public class LSDCGameOptionPages {
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable(String.valueOf(SystemAndGLInfo.getInstance().cpuInfo.getFrequency()) + "GHz"))
+                        .setName(Component.translatable(String.format(String.format( "%.2f",(float)SystemAndGLInfo.getInstance().cpuInfo.getFrequency() / 1000000000.0f) + "GHz")))
                         .setTooltip(Component.translatable("sodium.cpuInfo.frequency"))
                         .setControl(TickBoxControl::new)
                         .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
@@ -70,12 +76,17 @@ public class LSDCGameOptionPages {
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
-        return new OptionPage(Component.translatable("sodium.options.pages.cpuinfo"), ImmutableList.copyOf(groups));
     }
 
     public static OptionPage gpuInfo()
     {
         List<OptionGroup> groups = new ArrayList<>();
+        initGPUPages( groups);
+        return new OptionPage(Component.translatable("sodium.options.pages.gpuinfo"), ImmutableList.copyOf(groups));
+    }
+
+    static void initGPUPages(List<OptionGroup> groups)
+    {
         for(int i = 0 ; i < SystemAndGLInfo.getInstance().gpuInfoList.size() ; i++){
             groups.add(OptionGroup.createBuilder()
                     .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
@@ -104,12 +115,17 @@ public class LSDCGameOptionPages {
                             .build())
                     .build());
         }
-        return new OptionPage(Component.translatable("sodium.options.pages.gpuinfo"), ImmutableList.copyOf(groups));
     }
 
     public static OptionPage memoryInfo()
     {
         List<OptionGroup> groups = new ArrayList<>();
+        initMemoryPages( groups);
+        return new OptionPage(Component.translatable("sodium.options.pages.memoryInfo"), ImmutableList.copyOf(groups));
+    }
+
+    static void initMemoryPages(List<OptionGroup> groups)
+    {
         groups.add(OptionGroup.createBuilder()
                 .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
                         .setName(Component.translatable("sodium.memoryInfo.jvmTol"))
@@ -164,11 +180,16 @@ public class LSDCGameOptionPages {
                             .build())
                     .build());
         }
-        return new OptionPage(Component.translatable("sodium.options.pages.memoryInfo"), ImmutableList.copyOf(groups));
     }
     public static OptionPage softInfo()
     {
         List<OptionGroup> groups = new ArrayList<>();
+        initSoftPages( groups);
+        return new OptionPage(Component.translatable("sodium.options.pages.lsdc"), ImmutableList.copyOf(groups));
+    }
+
+    static void initSoftPages(List<OptionGroup> groups)
+    {
         groups.add(OptionGroup.createBuilder()
                 .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
                         .setName(Component.translatable("sodium.options.pages.simpleUI"))
@@ -232,258 +253,14 @@ public class LSDCGameOptionPages {
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
-        return new OptionPage(Component.translatable("sodium.options.pages.lsdc"), ImmutableList.copyOf(groups));
     }
     public static OptionPage lsdc()
     {
         List<OptionGroup> groups = new ArrayList<>();
-        groups.add(OptionGroup.createBuilder()
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable("sodium.options.pages.simpleUI"))
-                        .setTooltip(Component.translatable("sodium.options.pages.simpleUITooltip"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> opts.isSimpUI = value, opts -> opts.isSimpUI)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .build());
-        groups.add(OptionGroup.createBuilder()
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable("sodium.options.pages.sysinfo"))
-                        .setTooltip(Component.translatable("sodium.options.pages.sysinfo"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                        // .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable(SystemAndGLInfo.getInstance().getOSInfo()))
-                        .setTooltip(Component.translatable("sodium.options.pages.sysname"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                        // .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable("--------------------"))
-                        .setTooltip(Component.translatable(" "))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                        // .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable("sodium.options.pages.jdkinfo"))
-                        .setTooltip(Component.translatable("sodium.options.pages.jdkinfo"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                        // .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable(SystemAndGLInfo.getInstance().getJDKVersion()))
-                        .setTooltip(Component.translatable("sodium.options.pages.jdkversion"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                        // .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable("--------------------"))
-                        .setTooltip(Component.translatable(" "))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                        // .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable("sodium.options.pages.glinfo"))
-                        .setTooltip(Component.translatable("sodium.options.pages.glinfo"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                        // .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable(SystemAndGLInfo.getInstance().getGLVersion()))
-                        .setTooltip(Component.translatable("sodium.options.pages.glversion"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                        // .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable("--------------------"))
-                        .setTooltip(Component.translatable(" "))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                        // .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable("sodium.options.pages.cpuinfo"))
-                        .setTooltip(Component.translatable("sodium.options.pages.cpuinfo"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                        // .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable(SystemAndGLInfo.getInstance().cpuInfo.getName()))
-                        .setTooltip(Component.translatable("sodium.cpuInfo.name"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                       // .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable(SystemAndGLInfo.getInstance().cpuInfo.getVendor()))
-                        .setTooltip(Component.translatable("sodium.hardware.vendor"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                       // .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable(String.valueOf(SystemAndGLInfo.getInstance().cpuInfo.getCores())))
-                        .setTooltip(Component.translatable("sodium.cpuInfo.cores"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                     //   .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable(String.valueOf(SystemAndGLInfo.getInstance().cpuInfo.getThreads())))
-                        .setTooltip(Component.translatable("sodium.cpuInfo.threads"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                      // .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable(String.valueOf(SystemAndGLInfo.getInstance().cpuInfo.getFrequency()) + "GHz"))
-                        .setTooltip(Component.translatable("sodium.cpuInfo.frequency"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                     //   .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .build());
-        groups.add(OptionGroup.createBuilder()
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable("--------------------"))
-                        .setTooltip(Component.translatable(" "))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                        //  .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable("sodium.options.pages.gpuinfo"))
-                        .setTooltip(Component.translatable("sodium.options.pages.gpuinfo"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                        //  .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .build());
-        for(int i = 0 ; i < SystemAndGLInfo.getInstance().gpuInfoList.size() ; i++){
-            groups.add(OptionGroup.createBuilder()
-                    .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                            .setName(Component.translatable(SystemAndGLInfo.getInstance().gpuInfoList.get(i).getName()))
-                            .setTooltip(Component.translatable("sodium.gpuInfo.name"))
-                            .setControl(TickBoxControl::new)
-                            .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                            //  .setImpact(OptionImpact.LOW)
-                            .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                            .build())
-                    .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                            .setName(Component.translatable(SystemAndGLInfo.getInstance().gpuInfoList.get(i).getVendor()) )
-                            .setTooltip(Component.translatable("sodium.hardware.vendor"))
-                            .setControl(TickBoxControl::new)
-                            .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                            //  .setImpact(OptionImpact.LOW)
-                            .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                            .build())
-                    .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                            .setName(Component.translatable(String.format("%.2f",SystemAndGLInfo.getInstance().gpuInfoList.get(i).getVRam())+"GB"))
-                            .setTooltip(Component.translatable("sodium.gpuInfo.vram"))
-                            .setControl(TickBoxControl::new)
-                            .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                            //    .setImpact(OptionImpact.LOW)
-                            .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                            .build())
-                    .build());
-        }
-        groups.add(OptionGroup.createBuilder()
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable("--------------------"))
-                        .setTooltip(Component.translatable(" "))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                        //  .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable("sodium.options.pages.memoryInfo") )
-                        .setTooltip(Component.translatable("sodium.options.pages.memoryInfo"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                        //    .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable("sodium.memoryInfo.jvmTol"))
-                        .setTooltip(Component.translatable("sodium.memoryInfo.name"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                        //    .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                        .setName(Component.translatable(String.format("%.2f",SystemAndGLInfo.getInstance().getJVMTotalMemory()) +"MB"))
-                        .setTooltip(Component.translatable("sodium.memoryInfo.size"))
-                        .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                        //    .setImpact(OptionImpact.LOW)
-                        .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                        .build())
-                .build());
-        for(int i = 0 ; i < SystemAndGLInfo.getInstance().memoryInfoList.size() ; i++){
-            groups.add(OptionGroup.createBuilder()
-                    .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                            .setName(Component.translatable(SystemAndGLInfo.getInstance().memoryInfoList.get(i).getName()) )
-                            .setTooltip(Component.translatable("sodium.memoryInfo.name"))
-                            .setControl(TickBoxControl::new)
-                            .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                            //    .setImpact(OptionImpact.LOW)
-                            .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                            .build())
-                    .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                            .setName(Component.translatable(SystemAndGLInfo.getInstance().memoryInfoList.get(i).getVendor()))
-                            .setTooltip(Component.translatable("sodium.hardware.vendor"))
-                            .setControl(TickBoxControl::new)
-                            .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                            //    .setImpact(OptionImpact.LOW)
-                            .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                            .build())
-                    .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                            .setName(Component.translatable(String.format("%.2f",SystemAndGLInfo.getInstance().memoryInfoList.get(i).getSize()) +"MB"))
-                            .setTooltip(Component.translatable("sodium.memoryInfo.size"))
-                            .setControl(TickBoxControl::new)
-                            .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                            //   .setImpact(OptionImpact.LOW)
-                            .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                            .build())
-                    .add(OptionImpl.createBuilder(boolean.class, lsdcOpts)
-                            .setName(Component.translatable(String.format("%.2f",SystemAndGLInfo.getInstance().memoryInfoList.get(i).getClockSpeed())+"GHz"))
-                            .setTooltip(Component.translatable("sodium.memoryInfo.clockSpeed"))
-                            .setControl(TickBoxControl::new)
-                            .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
-                            //   .setImpact(OptionImpact.LOW)
-                            .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                            .build())
-                    .build());
-        }
+        initSoftPages( groups);
+        initCPUPages( groups);
+        initGPUPages( groups);
+        initMemoryPages( groups);
         return new OptionPage(Component.translatable("sodium.options.pages.lsdc"), ImmutableList.copyOf(groups));
     }
 }
