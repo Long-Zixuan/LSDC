@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 
 import loongly.lsdc.client.gui.LSDCGameOptions;
+import loongly.lsdc.api.*;
 //import loongly.lsdc.reflection.ReflectionAoFaceData;
 //import loongly.lsdc.reflection.ReflectionSmoothLightPipeline;
 
@@ -30,6 +31,7 @@ public class LSDCClientMod implements ClientModInitializer {
 		try
 		{
 			CONFIG = LSDCGameOptions.load();
+			SystemAndGLInfo.getInstance();
 
 			LOGGER.info("[LSDC] Sodium device check");
 		}

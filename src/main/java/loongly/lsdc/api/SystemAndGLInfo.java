@@ -16,10 +16,6 @@ import oshi.hardware.*;
 import java.util.Map;
 import java.util.HashMap;
 
-//import com.alibaba.fastjson.JSON;
-//import com.alibaba.fastjson.JSONObject;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.InputStream;
 
 
@@ -32,15 +28,21 @@ import java.util.concurrent.*;
 
 public class SystemAndGLInfo
 {
-    private static SystemAndGLInfo _instance = new SystemAndGLInfo();
+    private static SystemAndGLInfo _instance = null;
 
     public static SystemAndGLInfo getInstance()
     {
+        if(_instance == null)
+        {
+            _instance = new SystemAndGLInfo();
+        }
         return _instance;
     }
 
-    private Map<String,String> mobileSocPathNumberToSocNameMap;
-    private Map<String,String> mobileGPUPathNumberToGPUNameMap;
+    private RefMap<String,String> mobileSocPathNumberToSocNameMap;
+    private RefMap<String,String> mobileGPUPathNumberToGPUNameMap;
+
+
     private boolean isMobileSoc = false;
 
     private SystemInfo systemInfo = null;
@@ -51,10 +53,8 @@ public class SystemAndGLInfo
 
     /*Map*/
 
-    Map<String,String> initMapWithPathAndURL(String jsonFilePath, String jsonURL )
+    void initMapWithPathAndURL(String jsonFilePath, String jsonURL,RefMap refMap )
     {
-        Map map = new HashMap<String,String>();
-        // ObjectMapper objectMapper = new ObjectMapper();
         try (InputStream inputStream = this.getClass().getResourceAsStream(jsonFilePath)) {
             if (inputStream == null) {
                 System.err.println("JSON 文件未找到: " + jsonFilePath);
@@ -68,7 +68,7 @@ public class SystemAndGLInfo
                 String jsStr = new String(bytes);
 
                 //json对象转Map
-                map = convertJsonToMap(jsStr);
+                refMap.map = convertJsonToMap(jsStr);
             }
 
 
@@ -82,14 +82,13 @@ public class SystemAndGLInfo
         {
             try
             {
-                map = convertJsonToMap(jsonStr);
+                refMap.map = convertJsonToMap(jsonStr);
             }
             catch (Exception e)
             {
                 e.printStackTrace();
             }
         }
-        return map;
     }
 
     public Map convertJsonToMap(String jsonString) {
@@ -336,19 +335,18 @@ public class SystemAndGLInfo
     public void initGPUInfo()
     {
         gpuInfoList = new ArrayList();
-        if(isMobileSoc)
+
+        CentralProcessor processor = infoHardware.getProcessor();
+
+        String GPUPartNumber = processor.getProcessorIdentifier().getName();
+
+        String GPUName = getMobileGPUNameWithPathNumber(GPUPartNumber);
+        if(!GPUName.equals(GPUPartNumber))
         {
-            CentralProcessor processor = infoHardware.getProcessor();
-
-            String GPUPartNumber = processor.getProcessorIdentifier().getName();
-
-            String GPUName = getMobileGPUNameWithPathNumber(GPUPartNumber);
-
             GPUInfo gpuInfo = new GPUInfo(GPUName, processor.getProcessorIdentifier().getVendor(), 0);
             gpuInfoList.add(gpuInfo);
-
         }
-        if(!isMobileSoc)
+        else
         {
             List<GraphicsCard> graphicsCards = infoHardware.getGraphicsCards();
 
@@ -364,7 +362,7 @@ public class SystemAndGLInfo
     {
         if(mobileGPUPathNumberToGPUNameMap.containsKey(pathNumber))
         {
-            return (String)mobileGPUPathNumberToGPUNameMap.get(pathNumber);
+            return mobileGPUPathNumberToGPUNameMap.get(pathNumber);
         }
         return pathNumber;
     }
@@ -531,16 +529,22 @@ public class SystemAndGLInfo
         infoHardware = systemInfo.getHardware();
         CompletableFuture.runAsync(() ->
         {
-            mobileSocPathNumberToSocNameMap = initMapWithPathAndURL("/assets/lsdc/soc_map/MobileSocPathNumberToName.json",
-                    "https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileSocPathNumberToName.json");
+            mobileSocPathNumberToSocNameMap = new RefMap<>();
+            initMapWithPathAndURL("/assets/lsdc/soc_map/MobileSocPathNumberToName.json",
+                    "https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileSocPathNumberToName.json"
+                    ,mobileSocPathNumberToSocNameMap);
+            initCPUInfo();
+
         });
         CompletableFuture.runAsync(() ->
         {
-            mobileGPUPathNumberToGPUNameMap = initMapWithPathAndURL("/assets/lsdc/soc_map/MobileGPUPathNumberToName.json",
-                    "https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileGPUPathNumberToName.json");
+            mobileGPUPathNumberToGPUNameMap = new RefMap<>();
+            initMapWithPathAndURL("/assets/lsdc/soc_map/MobileGPUPathNumberToName.json",
+                    "https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileGPUPathNumberToName.json"
+                    ,mobileGPUPathNumberToGPUNameMap);
+            initGPUInfo();
+
         });
-        initCPUInfo();
-        initGPUInfo();
         initMemoryInfo();
 
     }
