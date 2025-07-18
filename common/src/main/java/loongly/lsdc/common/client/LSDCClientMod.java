@@ -21,7 +21,7 @@ public class LSDCClientMod {
 
 	public static void onInitClient() {
 		CONFIG = LSDCGameOptions.load();
-		SystemAndGLInfo.getInstance();
+		SystemAndGLInfo.initInstance();
 
 		LOGGER.info("Init LSDC Config");
 	}

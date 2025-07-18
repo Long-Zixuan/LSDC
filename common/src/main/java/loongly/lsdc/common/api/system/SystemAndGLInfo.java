@@ -35,11 +35,26 @@ public class SystemAndGLInfo
 {
     private static SystemAndGLInfo _instance = null;
 
+    public static synchronized void initInstance()
+    {
+        if(_instance != null)
+        {
+            return;
+        }
+        _instance = new SystemAndGLInfo(0);
+    }
+
     public static SystemAndGLInfo getInstance()
     {
-        if(_instance == null)
+        if(_instance == null)//防止init函数执行失败
         {
-            _instance = new SystemAndGLInfo();
+            synchronized(SystemAndGLInfo.class)
+            {
+                if(_instance == null)
+                {
+                    _instance = new SystemAndGLInfo();
+                }
+            }
         }
         return _instance;
     }
@@ -363,7 +378,7 @@ public class SystemAndGLInfo
         return path.matches("/data/user/[0-9]+/net\\.kdt\\.pojavlaunch");
     }
 
-    private SystemAndGLInfo()
+    private SystemAndGLInfo(int i)//有参构造函数的参数仅仅为了和无参构造函数区分，除此之外无意义（有参构造函数不能在一瞬间初始化完成所有类内成员）
     {
         systemInfo = new SystemInfo();
         infoHardware = systemInfo.getHardware();
@@ -385,6 +400,30 @@ public class SystemAndGLInfo
                     initGPUInfo();
 
         });
+        initMemoryInfo();
+
+    }
+
+    private SystemAndGLInfo()
+    {
+        systemInfo = new SystemInfo();
+        infoHardware = systemInfo.getHardware();
+        CompletableFuture.runAsync(() ->
+        {
+            mobileSocPathNumberToSocNameMap = new RefMap<>();
+            RefMap.initMapWithPathAndURL("/assets/lsdc/soc_map/MobileSocPathNumberToName.json",
+                    "https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileSocPathNumberToName.json"
+                    ,mobileSocPathNumberToSocNameMap);
+        });
+        CompletableFuture.runAsync(() ->
+        {
+            mobileGPUPathNumberToGPUNameMap = new RefMap<>();
+            RefMap.initMapWithPathAndURL("/assets/lsdc/soc_map/MobileGPUPathNumberToName.json",
+                    "https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileGPUPathNumberToName.json"
+                    ,mobileGPUPathNumberToGPUNameMap);
+        });
+        initCPUInfo();
+        initGPUInfo();
         initMemoryInfo();
 
     }
