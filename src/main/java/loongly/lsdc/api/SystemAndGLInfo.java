@@ -39,8 +39,8 @@ public class SystemAndGLInfo
         return _instance;
     }
 
-    private Map<String,String> mobileSocPathNumberToSocNameMap = new HashMap();
-    private Map<String,String> mobileGPUPathNumberToGPUNameMap = new HashMap();
+    private Map<String,String> mobileSocPathNumberToSocNameMap;
+    private Map<String,String> mobileGPUPathNumberToGPUNameMap;
     private boolean isMobileSoc = false;
 
     private SystemInfo systemInfo = null;
@@ -51,22 +51,25 @@ public class SystemAndGLInfo
 
     /*Map*/
 
-    void initMapWithPathAndURL(String jsonFilePath, String jsonURL, Map<String,String> map)
+    Map<String,String> initMapWithPathAndURL(String jsonFilePath, String jsonURL )
     {
-
+        Map map = new HashMap<String,String>();
         // ObjectMapper objectMapper = new ObjectMapper();
         try (InputStream inputStream = this.getClass().getResourceAsStream(jsonFilePath)) {
             if (inputStream == null) {
                 System.err.println("JSON 文件未找到: " + jsonFilePath);
-                return;
+                //return;
             }
-            byte[] bytes = new byte[0];
-            bytes = new byte[inputStream.available()];
-            inputStream.read(bytes);
-            String jsStr = new String(bytes);
+            else
+            {
+                byte[] bytes = new byte[0];
+                bytes = new byte[inputStream.available()];
+                inputStream.read(bytes);
+                String jsStr = new String(bytes);
 
-            //json对象转Map
-            map = convertJsonToMap(jsStr);
+                //json对象转Map
+                map = convertJsonToMap(jsStr);
+            }
 
 
         }
@@ -86,6 +89,7 @@ public class SystemAndGLInfo
                 e.printStackTrace();
             }
         }
+        return map;
     }
 
     public Map convertJsonToMap(String jsonString) {
@@ -452,7 +456,7 @@ public class SystemAndGLInfo
         if(mobileSocPathNumberToSocNameMap.containsKey(pathNumber))
         {
             isMobileSoc = true;
-            return (String)mobileSocPathNumberToSocNameMap.get(pathNumber);
+            return mobileSocPathNumberToSocNameMap.get(pathNumber);
         }
         return pathNumber;
     }
@@ -527,15 +531,13 @@ public class SystemAndGLInfo
         infoHardware = systemInfo.getHardware();
         CompletableFuture.runAsync(() ->
         {
-            initMapWithPathAndURL("/assets/lsdc/soc_map/MobileSocPathNumberToName.json",
-                    "https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileSocPathNumberToName.json",
-                    mobileSocPathNumberToSocNameMap);
+            mobileSocPathNumberToSocNameMap = initMapWithPathAndURL("/assets/lsdc/soc_map/MobileSocPathNumberToName.json",
+                    "https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileSocPathNumberToName.json");
         });
         CompletableFuture.runAsync(() ->
         {
-            initMapWithPathAndURL("/assets/lsdc/soc_map/MobileGPUPathNumberToName.json",
-                    "https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileGPUPathNumberToName.json",
-                    mobileGPUPathNumberToGPUNameMap);
+            mobileGPUPathNumberToGPUNameMap = initMapWithPathAndURL("/assets/lsdc/soc_map/MobileGPUPathNumberToName.json",
+                    "https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileGPUPathNumberToName.json");
         });
         initCPUInfo();
         initGPUInfo();
