@@ -49,7 +49,44 @@ public class SystemAndGLInfo
     public List<GPUInfo>gpuInfoList;
     public List<MemoryInfo>memoryInfoList;
 
-    /*Json To Map*/
+    /*Map*/
+
+    void initMapWithPathAndURL(String jsonFilePath, String jsonURL, Map<String,String> map)
+    {
+
+        // ObjectMapper objectMapper = new ObjectMapper();
+        try (InputStream inputStream = this.getClass().getResourceAsStream(jsonFilePath)) {
+            if (inputStream == null) {
+                System.err.println("JSON 文件未找到: " + jsonFilePath);
+                return;
+            }
+            byte[] bytes = new byte[0];
+            bytes = new byte[inputStream.available()];
+            inputStream.read(bytes);
+            String jsStr = new String(bytes);
+
+            //json对象转Map
+            map = convertJsonToMap(jsStr);
+
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        String jsonStr = doGet(jsonURL);
+        if(jsonStr != null)
+        {
+            try
+            {
+                map = convertJsonToMap(jsonStr);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public Map convertJsonToMap(String jsonString) {
         Map<String, Object> map = new HashMap<>();
@@ -319,41 +356,6 @@ public class SystemAndGLInfo
         }
     }
 
-    void initMobileGPUPathNumberToGPUNameMap()
-    {
-        String jsonFilePath = "/assets/lsdc/soc_map/MobileGPUPathNumberToName.json";
-        // ObjectMapper objectMapper = new ObjectMapper();
-        try (InputStream inputStream = this.getClass().getResourceAsStream(jsonFilePath)) {
-            if (inputStream == null) {
-                System.err.println("JSON 文件未找到: " + jsonFilePath);
-                return;
-            }
-            byte[] bytes = new byte[0];
-            bytes = new byte[inputStream.available()];
-            inputStream.read(bytes);
-            String jsStr = new String(bytes);
-
-            //json对象转Map
-            mobileGPUPathNumberToGPUNameMap = convertJsonToMap(jsStr);
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        String jsonStr = doGet("https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileGPUPathNumberToName.json");
-        if(jsonStr != null)
-        {
-            try
-            {
-                mobileGPUPathNumberToGPUNameMap = convertJsonToMap(jsonStr);
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
-    }
-
     private String getMobileGPUNameWithPathNumber(String pathNumber)
     {
         if(mobileGPUPathNumberToGPUNameMap.containsKey(pathNumber))
@@ -445,45 +447,6 @@ public class SystemAndGLInfo
         }
     }
 
-
-
-    void initmobileSocPathNumberToSocNameMap()
-    {
-        String jsonFilePath = "/assets/lsdc/soc_map/MobileSocPathNumberToName.json";
-        // ObjectMapper objectMapper = new ObjectMapper();
-        try (InputStream inputStream = this.getClass().getResourceAsStream(jsonFilePath)) {
-            if (inputStream == null) {
-                System.err.println("JSON 文件未找到: " + jsonFilePath);
-                return;
-            }
-            byte[] bytes = new byte[0];
-            bytes = new byte[inputStream.available()];
-            inputStream.read(bytes);
-            String jsStr = new String(bytes);
-
-            //json对象转Map
-            mobileSocPathNumberToSocNameMap = convertJsonToMap(jsStr);
-            //mobileSocPathNumberToSocNameMap = objectMapper.readValue(inputStream, Map.class);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        String jsonStr = doGet("https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileSocPathNumberToName.json");
-        if(jsonStr != null)
-        {
-            try
-            {
-
-                mobileSocPathNumberToSocNameMap = convertJsonToMap(jsonStr);
-
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
-    }
-
     private String getMobileSocNameWithPathNumber(String pathNumber)
     {
         if(mobileSocPathNumberToSocNameMap.containsKey(pathNumber))
@@ -564,11 +527,15 @@ public class SystemAndGLInfo
         infoHardware = systemInfo.getHardware();
         CompletableFuture.runAsync(() ->
         {
-            initmobileSocPathNumberToSocNameMap();
+            initMapWithPathAndURL("/assets/lsdc/soc_map/MobileSocPathNumberToName.json",
+                    "https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileSocPathNumberToName.json",
+                    mobileSocPathNumberToSocNameMap);
         });
         CompletableFuture.runAsync(() ->
         {
-            initMobileGPUPathNumberToGPUNameMap();
+            initMapWithPathAndURL("/assets/lsdc/soc_map/MobileGPUPathNumberToName.json",
+                    "https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileGPUPathNumberToName.json",
+                    mobileGPUPathNumberToGPUNameMap);
         });
         initCPUInfo();
         initGPUInfo();
