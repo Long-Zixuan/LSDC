@@ -19,10 +19,6 @@ import org.slf4j.LoggerFactory;
 import java.util.Map;
 import java.util.HashMap;
 
-//import com.alibaba.fastjson.JSON;
-//import com.alibaba.fastjson.JSONObject;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.InputStream;
 import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
@@ -46,8 +42,10 @@ public class SystemAndGLInfo
         return _instance;
     }
 
-    private Map<String,String> mobileSocPathNumberToSocNameMap = new HashMap();
-    private Map<String,String> mobileGPUPathNumberToGPUNameMap = new HashMap();
+    private RefMap<String,String> mobileSocPathNumberToSocNameMap;
+    private RefMap<String,String> mobileGPUPathNumberToGPUNameMap;
+
+
     private boolean isMobileSoc = false;
 
     private SystemInfo systemInfo = null;
@@ -58,22 +56,23 @@ public class SystemAndGLInfo
 
     /*Map*/
 
-    void initMapWithPathAndURL(String jsonFilePath, String jsonURL, Map<String,String> map)
+    void initMapWithPathAndURL(String jsonFilePath, String jsonURL,RefMap refMap )
     {
-
-        // ObjectMapper objectMapper = new ObjectMapper();
         try (InputStream inputStream = this.getClass().getResourceAsStream(jsonFilePath)) {
             if (inputStream == null) {
                 System.err.println("JSON 文件未找到: " + jsonFilePath);
-                return;
+                //return;
             }
-            byte[] bytes = new byte[0];
-            bytes = new byte[inputStream.available()];
-            inputStream.read(bytes);
-            String jsStr = new String(bytes);
+            else
+            {
+                byte[] bytes = new byte[0];
+                bytes = new byte[inputStream.available()];
+                inputStream.read(bytes);
+                String jsStr = new String(bytes);
 
-            //json对象转Map
-            map = convertJsonToMap(jsStr);
+                //json对象转Map
+                refMap.map = convertJsonToMap(jsStr);
+            }
 
 
         }
@@ -86,7 +85,7 @@ public class SystemAndGLInfo
         {
             try
             {
-                map = convertJsonToMap(jsonStr);
+                refMap.map = convertJsonToMap(jsonStr);
             }
             catch (Exception e)
             {
@@ -351,7 +350,7 @@ public class SystemAndGLInfo
             gpuInfoList.add(gpuInfo);
 
         }
-        if(!isMobileSoc)
+        else
         {
             List<GraphicsCard> graphicsCards = infoHardware.getGraphicsCards();
 
@@ -367,7 +366,7 @@ public class SystemAndGLInfo
     {
         if(mobileGPUPathNumberToGPUNameMap.containsKey(pathNumber))
         {
-            return (String)mobileGPUPathNumberToGPUNameMap.get(pathNumber);
+            return mobileGPUPathNumberToGPUNameMap.get(pathNumber);
         }
         return pathNumber;
     }
@@ -459,7 +458,7 @@ public class SystemAndGLInfo
         if(mobileSocPathNumberToSocNameMap.containsKey(pathNumber))
         {
             isMobileSoc = true;
-            return (String)mobileSocPathNumberToSocNameMap.get(pathNumber);
+            return mobileSocPathNumberToSocNameMap.get(pathNumber);
         }
         return pathNumber;
     }
@@ -534,15 +533,19 @@ public class SystemAndGLInfo
         infoHardware = systemInfo.getHardware();
         CompletableFuture.runAsync(() ->
         {
+            mobileSocPathNumberToSocNameMap = new RefMap<>();
             initMapWithPathAndURL("/assets/lsdc/soc_map/MobileSocPathNumberToName.json",
-                    "https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileSocPathNumberToName.json",
-                    mobileSocPathNumberToSocNameMap);
+                    "https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileSocPathNumberToName.json"
+                    ,mobileSocPathNumberToSocNameMap);
+
         });
         CompletableFuture.runAsync(() ->
         {
+            mobileGPUPathNumberToGPUNameMap = new RefMap<>();
             initMapWithPathAndURL("/assets/lsdc/soc_map/MobileGPUPathNumberToName.json",
-                    "https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileGPUPathNumberToName.json",
-                    mobileGPUPathNumberToGPUNameMap);
+                    "https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileGPUPathNumberToName.json"
+                    ,mobileGPUPathNumberToGPUNameMap);
+
         });
         initCPUInfo();
         initGPUInfo();
