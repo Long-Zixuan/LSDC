@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import loongly.lsdc.common.client.gui.LSDCGameOptions;
 import net.minecraft.Util;
+import loongly.lsdc.common.api.system.*;
 
 
 public class LSDCClientMod {
@@ -20,6 +21,7 @@ public class LSDCClientMod {
 
 	public static void onInitClient() {
 		CONFIG = LSDCGameOptions.load();
+		SystemAndGLInfo.getInstance();
 
 		LOGGER.info("Init LSDC Config");
 	}

@@ -35,10 +35,14 @@ import java.util.concurrent.*;
 
 public class SystemAndGLInfo
 {
-    private static SystemAndGLInfo _instance = new SystemAndGLInfo();
+    private static SystemAndGLInfo _instance = null;
 
     public static SystemAndGLInfo getInstance()
     {
+        if(_instance == null)
+        {
+            _instance = new SystemAndGLInfo();
+        }
         return _instance;
     }
 
@@ -338,17 +342,16 @@ public class SystemAndGLInfo
     public void initGPUInfo()
     {
         gpuInfoList = new ArrayList();
-        if(isMobileSoc)
+
+        CentralProcessor processor = infoHardware.getProcessor();
+
+        String GPUPartNumber = processor.getProcessorIdentifier().getName();
+
+        String GPUName = getMobileGPUNameWithPathNumber(GPUPartNumber);
+        if(!GPUName.equals(GPUPartNumber))
         {
-            CentralProcessor processor = infoHardware.getProcessor();
-
-            String GPUPartNumber = processor.getProcessorIdentifier().getName();
-
-            String GPUName = getMobileGPUNameWithPathNumber(GPUPartNumber);
-
             GPUInfo gpuInfo = new GPUInfo(GPUName, processor.getProcessorIdentifier().getVendor(), 0);
             gpuInfoList.add(gpuInfo);
-
         }
         else
         {
@@ -537,6 +540,7 @@ public class SystemAndGLInfo
             initMapWithPathAndURL("/assets/lsdc/soc_map/MobileSocPathNumberToName.json",
                     "https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileSocPathNumberToName.json"
                     ,mobileSocPathNumberToSocNameMap);
+                    initCPUInfo();
 
         });
         CompletableFuture.runAsync(() ->
@@ -545,10 +549,9 @@ public class SystemAndGLInfo
             initMapWithPathAndURL("/assets/lsdc/soc_map/MobileGPUPathNumberToName.json",
                     "https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileGPUPathNumberToName.json"
                     ,mobileGPUPathNumberToGPUNameMap);
+                    initGPUInfo();
 
         });
-        initCPUInfo();
-        initGPUInfo();
         initMemoryInfo();
 
     }
