@@ -32,11 +32,11 @@ import java.util.concurrent.*;
 
 public class SystemAndGLInfo
 {
-    private static SystemAndGLInfo instance = new SystemAndGLInfo();
+    private static SystemAndGLInfo _instance = new SystemAndGLInfo();
 
     public static SystemAndGLInfo getInstance()
     {
-        return instance;
+        return _instance;
     }
 
     private Map<String,String> mobileSocPathNumberToSocNameMap = new HashMap();
@@ -45,10 +45,11 @@ public class SystemAndGLInfo
 
     private SystemInfo systemInfo = null;
     private HardwareAbstractionLayer infoHardware = null;
-
     public CPUInfo cpuInfo = null;
     public List<GPUInfo>gpuInfoList;
     public List<MemoryInfo>memoryInfoList;
+
+    /*Json To Map*/
 
     public Map convertJsonToMap(String jsonString) {
         Map<String, Object> map = new HashMap<>();
@@ -113,6 +114,71 @@ public class SystemAndGLInfo
             throw new IllegalArgumentException("Unsupported value type: " + valueStr);
         }
     }
+
+    /*Net*/
+
+    private String doGet(String httpurl)
+    {
+        HttpURLConnection connection = null;
+        InputStream is = null;
+        BufferedReader br = null;
+        String result = null;// 返回结果字符串
+        try {
+            // 创建远程url连接对象
+            URL url = new URL(httpurl);
+            // 通过远程url连接对象打开一个连接，强转成httpURLConnection类
+            connection = (HttpURLConnection) url.openConnection();
+            // 设置连接方式：get
+            connection.setRequestMethod("GET");
+            // 设置连接主机服务器的超时时间：15000毫秒
+            connection.setConnectTimeout(3000);
+            // 设置读取远程返回的数据时间：60000毫秒
+            connection.setReadTimeout(6000);
+            // 发送请求
+            connection.connect();
+            // 通过connection连接，获取输入流
+            if (connection.getResponseCode() == 200) {
+                is = connection.getInputStream();
+                // 封装输入流is，并指定字符集
+                br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+                // 存放数据
+                StringBuffer sbf = new StringBuffer();
+                String temp = null;
+                while ((temp = br.readLine()) != null) {
+                    sbf.append(temp);
+                    sbf.append("\r\n");
+                }
+                result = sbf.toString();
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            // 关闭资源
+            if (null != br) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (null != is) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            connection.disconnect();// 关闭远程连接
+        }
+
+        return result;
+    }
+
+    /*Memory Info */
 
     public double getJVMTotalMemory()
     {
@@ -189,6 +255,8 @@ public class SystemAndGLInfo
         }
     }
 
+    /*GPU Info*/
+
     public static class GPUInfo
     {
         private String name;
@@ -234,11 +302,10 @@ public class SystemAndGLInfo
             String GPUPartNumber = processor.getProcessorIdentifier().getName();
 
             String GPUName = getMobileGPUNameWithPathNumber(GPUPartNumber);
-            if(isMobileSoc)
-            {
-                GPUInfo gpuInfo = new GPUInfo(GPUName, processor.getProcessorIdentifier().getVendor(), 66);
-                gpuInfoList.add(gpuInfo);
-            }
+
+            GPUInfo gpuInfo = new GPUInfo(GPUName, processor.getProcessorIdentifier().getVendor(), 0);
+            gpuInfoList.add(gpuInfo);
+
         }
         if(!isMobileSoc)
         {
@@ -252,6 +319,51 @@ public class SystemAndGLInfo
         }
     }
 
+    void initMobileGPUPathNumberToGPUNameMap()
+    {
+        String jsonFilePath = "/assets/lsdc/soc_map/MobileGPUPathNumberToName.json";
+        // ObjectMapper objectMapper = new ObjectMapper();
+        try (InputStream inputStream = this.getClass().getResourceAsStream(jsonFilePath)) {
+            if (inputStream == null) {
+                System.err.println("JSON 文件未找到: " + jsonFilePath);
+                return;
+            }
+            byte[] bytes = new byte[0];
+            bytes = new byte[inputStream.available()];
+            inputStream.read(bytes);
+            String jsStr = new String(bytes);
+
+            //json对象转Map
+            mobileGPUPathNumberToGPUNameMap = convertJsonToMap(jsStr);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String jsonStr = doGet("https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileGPUPathNumberToName.json");
+        if(jsonStr != null)
+        {
+            try
+            {
+                mobileGPUPathNumberToGPUNameMap = convertJsonToMap(jsonStr);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private String getMobileGPUNameWithPathNumber(String pathNumber)
+    {
+        if(mobileGPUPathNumberToGPUNameMap.containsKey(pathNumber))
+        {
+            return (String)mobileGPUPathNumberToGPUNameMap.get(pathNumber);
+        }
+        return pathNumber;
+    }
+
+    /*CPU Info */
     public static class CPUInfo
     {
         private String name;
@@ -333,65 +445,7 @@ public class SystemAndGLInfo
         }
     }
 
-    public String doGet(String httpurl)
-    {
-        HttpURLConnection connection = null;
-        InputStream is = null;
-        BufferedReader br = null;
-        String result = null;// 返回结果字符串
-        try {
-            // 创建远程url连接对象
-            URL url = new URL(httpurl);
-            // 通过远程url连接对象打开一个连接，强转成httpURLConnection类
-            connection = (HttpURLConnection) url.openConnection();
-            // 设置连接方式：get
-            connection.setRequestMethod("GET");
-            // 设置连接主机服务器的超时时间：15000毫秒
-            connection.setConnectTimeout(3000);
-            // 设置读取远程返回的数据时间：60000毫秒
-            connection.setReadTimeout(6000);
-            // 发送请求
-            connection.connect();
-            // 通过connection连接，获取输入流
-            if (connection.getResponseCode() == 200) {
-                is = connection.getInputStream();
-                // 封装输入流is，并指定字符集
-                br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-                // 存放数据
-                StringBuffer sbf = new StringBuffer();
-                String temp = null;
-                while ((temp = br.readLine()) != null) {
-                    sbf.append(temp);
-                    sbf.append("\r\n");
-                }
-                result = sbf.toString();
-            }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            // 关闭资源
-            if (null != br) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
 
-            if (null != is) {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            connection.disconnect();// 关闭远程连接
-        }
-
-        return result;
-    }
 
     void initmobileSocPathNumberToSocNameMap()
     {
@@ -421,72 +475,13 @@ public class SystemAndGLInfo
             {
 
                 mobileSocPathNumberToSocNameMap = convertJsonToMap(jsonStr);
-                //objectMapper = new ObjectMapper();
-                //InputStream inStream = new ByteArrayInputStream(jsonStr.getBytes());
-                //mobileSocPathNumberToSocNameMap = objectMapper.readValue(inStream, Map.class);
+
             }
             catch (Exception e)
             {
                 e.printStackTrace();
             }
         }
-    }
-
-    void initMobileGPUPathNumberToGPUNameMap()
-    {
-        String jsonFilePath = "/assets/lsdc/soc_map/MobileGPUPathNumberToName.json";
-        // ObjectMapper objectMapper = new ObjectMapper();
-        try (InputStream inputStream = this.getClass().getResourceAsStream(jsonFilePath)) {
-            if (inputStream == null) {
-                System.err.println("JSON 文件未找到: " + jsonFilePath);
-                return;
-            }
-            byte[] bytes = new byte[0];
-            bytes = new byte[inputStream.available()];
-            inputStream.read(bytes);
-            String jsStr = new String(bytes);
-
-            //json对象转Map
-            mobileGPUPathNumberToGPUNameMap = convertJsonToMap(jsStr);
-            //mobileSocPathNumberToSocNameMap = objectMapper.readValue(inputStream, Map.class);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        String jsonStr = doGet("https://gitee.com/zixuan_long/Json/raw/master/sodium/soc_map/MobileGPUPathNumberToName.json");
-        if(jsonStr != null)
-        {
-            try
-            {
-
-                mobileGPUPathNumberToGPUNameMap = convertJsonToMap(jsonStr);
-                //objectMapper = new ObjectMapper();
-                //InputStream inStream = new ByteArrayInputStream(jsonStr.getBytes());
-                //mobileSocPathNumberToSocNameMap = objectMapper.readValue(inStream, Map.class);
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private SystemAndGLInfo()
-    {
-        systemInfo = new SystemInfo();
-        infoHardware = systemInfo.getHardware();
-        CompletableFuture.runAsync(() ->
-        {
-            initmobileSocPathNumberToSocNameMap();
-        });
-        CompletableFuture.runAsync(() ->
-        {
-            initMobileGPUPathNumberToGPUNameMap();
-        });
-        initCPUInfo();
-        initGPUInfo();
-        initMemoryInfo();
-
     }
 
     private String getMobileSocNameWithPathNumber(String pathNumber)
@@ -499,15 +494,7 @@ public class SystemAndGLInfo
         return pathNumber;
     }
 
-    private String getMobileGPUNameWithPathNumber(String pathNumber)
-    {
-        if(mobileGPUPathNumberToGPUNameMap.containsKey(pathNumber))
-        {
-            return mobileGPUPathNumberToGPUNameMap.get(pathNumber);
-        }
-        isMobileSoc = false;
-        return pathNumber;
-    }
+    /*Software Info API*/
 
     public String getJDKVersion()
     {
@@ -550,7 +537,7 @@ public class SystemAndGLInfo
         if (librarySearchPaths != null) {
             for (String path : librarySearchPaths.split(":")) {
                 if (isKnownAndroidPathFragment(path)) {
-                   // System.out.println("Found a library search path which seems to be hosted in an Android filesystem: {}", path);
+                    // System.out.println("Found a library search path which seems to be hosted in an Android filesystem: {}", path);
 
                     return true;
                 }
@@ -571,7 +558,26 @@ public class SystemAndGLInfo
         return path.matches("/data/user/[0-9]+/net\\.kdt\\.pojavlaunch");
     }
 
+    private SystemAndGLInfo()
+    {
+        systemInfo = new SystemInfo();
+        infoHardware = systemInfo.getHardware();
+        CompletableFuture.runAsync(() ->
+        {
+            initmobileSocPathNumberToSocNameMap();
+        });
+        CompletableFuture.runAsync(() ->
+        {
+            initMobileGPUPathNumberToGPUNameMap();
+        });
+        initCPUInfo();
+        initGPUInfo();
+        initMemoryInfo();
+
+    }
+
 }
 
 //LZX-Idea2023-2024-12-18-001
 //LZX completed this api at 2024-12-18  11；46
+//LoongLy Software 2025/07/16 Update
