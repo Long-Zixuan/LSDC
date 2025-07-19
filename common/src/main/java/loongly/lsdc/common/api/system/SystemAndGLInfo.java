@@ -21,10 +21,8 @@ import java.util.HashMap;
 
 import java.io.InputStream;
 import java.io.ByteArrayInputStream;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -33,30 +31,30 @@ import java.util.concurrent.*;
 
 public class SystemAndGLInfo
 {
-    private static SystemAndGLInfo _instance = null;
+    private static SystemAndGLInfo instance = null;
 
     public static synchronized void initInstance()
     {
-        if(_instance != null)
+        if(instance != null)
         {
             return;
         }
-        _instance = new SystemAndGLInfo(0);
+        instance = new SystemAndGLInfo(0);
     }
 
     public static SystemAndGLInfo getInstance()
     {
-        if(_instance == null)//防止init函数执行失败
+        if(instance == null)//防止init函数执行失败
         {
             synchronized(SystemAndGLInfo.class)
             {
-                if(_instance == null)
+                if(instance == null)
                 {
-                    _instance = new SystemAndGLInfo();
+                    instance = new SystemAndGLInfo();
                 }
             }
         }
-        return _instance;
+        return instance;
     }
 
     private RefMap<String,String> mobileSocPathNumberToSocNameMap;
@@ -67,11 +65,24 @@ public class SystemAndGLInfo
 
     private SystemInfo systemInfo = null;
     private HardwareAbstractionLayer infoHardware = null;
-    public CPUInfo cpuInfo = null;
-    public List<GPUInfo>gpuInfoList;
-    public List<MemoryInfo>memoryInfoList;
+    private CPUInfo cpuInfo = null;
+    public CPUInfo getCpuInfo()
+    {
+        return cpuInfo;
+    }
+    private List<GPUInfo>gpuInfoList;
 
+    public List<GPUInfo> getGpuInfoList()
+    {
+        return gpuInfoList;
+    }
 
+    private List<MemoryInfo>memoryInfoList;
+
+    public List<MemoryInfo> getMemoryInfoList()
+    {
+        return memoryInfoList;
+    }
 
     /*Memory Info */
 
