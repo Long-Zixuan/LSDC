@@ -23,6 +23,7 @@
   "sodium.memnory": "RAM",
   "sodium.options.pages.sysinfo":  "OS Info",
   "sodium.options.pages.sysname":  "OS Name",
+  "sodium.options.pages.sysversion":  "OS Version",
   "sodium.options.pages.glinfo":"OpenGL Info",
   "sodium.options.pages.glversion":"OpenGL Version",
   "sodium.options.pages.lsdc":  "Device Info",
