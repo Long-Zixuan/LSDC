@@ -23,6 +23,7 @@
   "sodium.options.pages.memoryInfo": "記憶體資訊",
   "sodium.options.pages.sysinfo":  "作業系統資訊",
   "sodium.options.pages.sysname":  "作業系統名稱",
+  "sodium.options.pages.sysversion":  "作業系統版本",
   "sodium.options.pages.glinfo":"OpenGL資訊",
   "sodium.options.pages.glversion":"OpenGL版本",
   "sodium.options.pages.lsdc":  "設備資訊",

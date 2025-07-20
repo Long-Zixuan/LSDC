@@ -348,9 +348,13 @@ public class SystemAndGLInfo
         return glInfo;
     }
 
-    public String getOSInfo()
+    public String getOSName()
     {
-        return System.getProperty("os.name")+" "+System.getProperty("os.version");
+        return System.getProperty("os.name");
+    }
+    public String getOSVersion()
+    {
+        return System.getProperty("os.version");
     }
 
     public boolean isUsingPojavLauncher() {
