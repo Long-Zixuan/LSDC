@@ -24,7 +24,7 @@ public abstract class SodiumOptionsGUIMixin {
 
 
     @Inject(method = "<init>*", at = @At("TAIL"))
-    private void addSSPBOptionPage(CallbackInfo ci)
+    private void addLSDCOptionPage(CallbackInfo ci)
     {
         if(!LSDCClientMod.options().isSimpUI)
         {
