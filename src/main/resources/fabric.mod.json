@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "lsdc",
+  "version": "${version}",
+
+  "name": "Sodium Device Check",
+  "description": "SDC will detect your device configuration when using the sodium module as a reference for setting image quality, making it convenient for you to adjust the image quality.  ",
+  "authors": [
+    "LoongLy"
+  ],
+  "contact": {
+    "sources": "https://github.com/Long-Zixuan/LSDC",
+    "issues": "https://github.com/Long-Zixuan/LSDC/issues"
+  },
+
+  "license": "LGPLv3",
+  "icon": "assets/lsdc/icon.png",
+
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.modrinth": "https://modrinth.com/mod/sodium-device-check",
+        "modmenu.curseforge" : "https://www.curseforge.com/minecraft/mc-mods/sodium-device-check"
+      }
+    }
+  },
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "loongly.lsdc.client.LSDCClientMod"
+    ]
+  },
+  "mixins": [
+    "lsdc.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.12.10",
+    "java": ">=17"
+  },
+
+  "suggests": {
+    "fabric-api": "*",
+    "sodium": ">=0.4.3 <0.6.0-"
+  },
+
+  "breaks": {
+    "sodium": ["<0.4.3", ">=0.6.0-"]
+  }
+}
