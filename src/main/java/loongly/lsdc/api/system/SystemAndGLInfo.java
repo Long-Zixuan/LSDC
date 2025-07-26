@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
@@ -74,14 +75,14 @@ public class SystemAndGLInfo
 
     public List<GPUInfo> getGpuInfoList()
     {
-        return gpuInfoList;
+        return Collections.unmodifiableList(gpuInfoList);
     }
 
     private List<MemoryInfo>memoryInfoList;
 
     public List<MemoryInfo> getMemoryInfoList()
     {
-        return memoryInfoList;
+        return Collections.unmodifiableList(memoryInfoList);
     }
 
     /*Memory Info */
