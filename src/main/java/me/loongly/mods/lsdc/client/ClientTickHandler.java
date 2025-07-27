@@ -1,6 +1,6 @@
 package me.loongly.mods.lsdc.client;
 
-import me.loongly.mods.lsdc.EmbeddiumExtraMod;
+import me.loongly.mods.lsdc.EmbeddiumDeviceCheckMod;
 import com.google.common.collect.EvictingQueue;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.Queue;
 import java.util.stream.IntStream;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT, modid = EmbeddiumExtraMod.MOD_ID)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT, modid = EmbeddiumDeviceCheckMod.MOD_ID)
 public class ClientTickHandler {
     private static int averageFps, lowestFps, highestFps;
     private static final Queue<Integer> fpsQueue = EvictingQueue.create(200);

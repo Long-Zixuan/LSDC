@@ -2,8 +2,8 @@ package me.loongly.mods.lsdc.client.gui;
 
 import com.google.common.collect.ImmutableList;
 import me.loongly.mods.lsdc.api.system.SystemAndGLInfo;
-import me.loongly.mods.lsdc.client.SodiumExtraClientMod;
-import me.loongly.mods.lsdc.client.gui.options.storage.SodiumExtraOptionsStorage;
+import me.loongly.mods.lsdc.client.LSDCClientMod;
+import me.loongly.mods.lsdc.client.gui.options.storage.LSDCOptionsStorage;
 import me.jellysquid.mods.sodium.client.gui.options.*;
 import me.jellysquid.mods.sodium.client.gui.options.control.TickBoxControl;
 import me.jellysquid.mods.sodium.client.gui.options.storage.MinecraftOptionsStorage;
@@ -14,8 +14,8 @@ import net.minecraft.util.Identifier;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class SodiumExtraGameOptionPages {
-    public static final SodiumExtraOptionsStorage sodiumExtraOpts = new SodiumExtraOptionsStorage();
+public class LSDCGameOptionPages {
+    public static final LSDCOptionsStorage sodiumExtraOpts = new LSDCOptionsStorage();
     public static final MinecraftOptionsStorage vanillaOpts = new MinecraftOptionsStorage();
 
     private static Text parseVanillaString(String key) {
@@ -44,7 +44,7 @@ public class SodiumExtraGameOptionPages {
                         .setName(Text.translatable("sodium.options.pages.cpuinfo"))
                         .setTooltip(Text.translatable("sodium.options.pages.cpuinfo"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                         // .setImpact(OptionImpact.LOW)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
@@ -52,7 +52,7 @@ public class SodiumExtraGameOptionPages {
                         .setName(Text.translatable(SystemAndGLInfo.getInstance().getCpuInfo().getName()))
                         .setTooltip(Text.translatable("sodium.cpuInfo.name"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                         // .setImpact(OptionImpact.LOW)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
@@ -61,7 +61,7 @@ public class SodiumExtraGameOptionPages {
                                 SystemAndGLInfo.getInstance().getCpuInfo().getVendor()))
                         .setTooltip(Text.translatable("sodium.hardware.vendor"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                         //   .setImpact(OptionImpact.LOW)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
@@ -70,7 +70,7 @@ public class SodiumExtraGameOptionPages {
                                 String.valueOf(SystemAndGLInfo.getInstance().getCpuInfo().getCores())))
                         .setTooltip(Text.translatable("sodium.cpuInfo.cores"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .add(OptionImpl.createBuilder(boolean.class, sodiumExtraOpts)
@@ -78,7 +78,7 @@ public class SodiumExtraGameOptionPages {
                                 String.valueOf(SystemAndGLInfo.getInstance().getCpuInfo().getThreads())))
                         .setTooltip(Text.translatable("sodium.cpuInfo.threads"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                         //     .setImpact(OptionImpact.LOW)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
@@ -88,7 +88,7 @@ public class SodiumExtraGameOptionPages {
                                         (float)SystemAndGLInfo.getInstance().getCpuInfo().getFrequency() / 1000000000.0f) + "GHz")))
                         .setTooltip(Text.translatable("sodium.cpuInfo.frequency"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                         //    .setImpact(OptionImpact.LOW)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
@@ -109,7 +109,7 @@ public class SodiumExtraGameOptionPages {
                         .setName(Text.translatable("sodium.options.pages.gpuinfo"))
                         .setTooltip(Text.translatable("sodium.options.pages.gpuinfo"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                         //   .setImpact(OptionImpact.LOW)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
@@ -121,7 +121,7 @@ public class SodiumExtraGameOptionPages {
                                     .append(Text.literal(" "+Integer.toString(i + 1))))
                             .setTooltip(Text.translatable(" "))
                             .setControl(TickBoxControl::new)
-                            .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                            .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                             //   .setImpact(OptionImpact.LOW)
                             .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                             .build())
@@ -129,7 +129,7 @@ public class SodiumExtraGameOptionPages {
                             .setName(Text.translatable(SystemAndGLInfo.getInstance().getGpuInfoList().get(i).getName()))
                             .setTooltip(Text.translatable("sodium.gpuInfo.name"))
                             .setControl(TickBoxControl::new)
-                            .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                            .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                             //   .setImpact(OptionImpact.LOW)
                             .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                             .build())
@@ -138,7 +138,7 @@ public class SodiumExtraGameOptionPages {
                                     SystemAndGLInfo.getInstance().getGpuInfoList().get(i).getVendor()))
                             .setTooltip(Text.translatable("sodium.hardware.vendor"))
                             .setControl(TickBoxControl::new)
-                            .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                            .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                             //     .setImpact(OptionImpact.LOW)
                             .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                             .build())
@@ -147,7 +147,7 @@ public class SodiumExtraGameOptionPages {
                                     SystemAndGLInfo.getInstance().getGpuInfoList().get(i).getVRam())+"GB"))
                             .setTooltip(Text.translatable("sodium.gpuInfo.vram"))
                             .setControl(TickBoxControl::new)
-                            .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                            .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                             //    .setImpact(OptionImpact.LOW)
                             .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                             .build())
@@ -169,7 +169,7 @@ public class SodiumExtraGameOptionPages {
                         .setName(Text.translatable("sodium.options.pages.memoryInfo"))
                         .setTooltip(Text.translatable("sodium.options.pages.memoryInfo"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
@@ -178,7 +178,7 @@ public class SodiumExtraGameOptionPages {
                         .setName(Text.translatable("sodium.memoryInfo.jvmTol"))
                         .setTooltip(Text.translatable("sodium.memoryInfo.name"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .add(OptionImpl.createBuilder(boolean.class, sodiumExtraOpts)
@@ -186,7 +186,7 @@ public class SodiumExtraGameOptionPages {
                                 String.format("%.2f",SystemAndGLInfo.getInstance().getJVMTotalMemory()) +"MB"))
                         .setTooltip(Text.translatable("sodium.memoryInfo.size"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
@@ -197,14 +197,14 @@ public class SodiumExtraGameOptionPages {
                                     .append(Text.literal(" "+Integer.toString(i + 1))))
                             .setTooltip(Text.translatable(" "))
                             .setControl(TickBoxControl::new)
-                            .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                            .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                             .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                             .build())
                     .add(OptionImpl.createBuilder(boolean.class, sodiumExtraOpts)
                             .setName(Text.translatable(SystemAndGLInfo.getInstance().getMemoryInfoList().get(i).getName()) )
                             .setTooltip(Text.translatable("sodium.memoryInfo.name"))
                             .setControl(TickBoxControl::new)
-                            .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                            .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                             //    .setImpact(OptionImpact.LOW)
                             .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                             .build())
@@ -213,7 +213,7 @@ public class SodiumExtraGameOptionPages {
                                     SystemAndGLInfo.getInstance().getMemoryInfoList().get(i).getVendor()))
                             .setTooltip(Text.translatable("sodium.hardware.vendor"))
                             .setControl(TickBoxControl::new)
-                            .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                            .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                             .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                             .build())
                     .add(OptionImpl.createBuilder(boolean.class, sodiumExtraOpts)
@@ -221,7 +221,7 @@ public class SodiumExtraGameOptionPages {
                                     String.format("%.2f", SystemAndGLInfo.getInstance().getMemoryInfoList().get(i).getSize()) +"MB"))
                             .setTooltip(Text.translatable("sodium.memoryInfo.size"))
                             .setControl(TickBoxControl::new)
-                            .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                            .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                             .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                             .build())
                     .add(OptionImpl.createBuilder(boolean.class, sodiumExtraOpts)
@@ -229,7 +229,7 @@ public class SodiumExtraGameOptionPages {
                                     String.format("%.2f", SystemAndGLInfo.getInstance().getMemoryInfoList().get(i).getClockSpeed())+"GHz"))
                             .setTooltip(Text.translatable("sodium.memoryInfo.clockSpeed"))
                             .setControl(TickBoxControl::new)
-                            .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                            .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                             .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                             .build())
                     .build());
@@ -258,7 +258,7 @@ public class SodiumExtraGameOptionPages {
                         .setName(Text.translatable("sodium.options.pages.sysinfo"))
                         .setTooltip(Text.translatable("sodium.options.pages.sysinfo"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .add(OptionImpl.createBuilder(boolean.class, sodiumExtraOpts)
@@ -266,7 +266,7 @@ public class SodiumExtraGameOptionPages {
                                 SystemAndGLInfo.getInstance().getOSName()))
                         .setTooltip(Text.translatable("sodium.options.pages.sysname"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .add(OptionImpl.createBuilder(boolean.class, sodiumExtraOpts)
@@ -274,7 +274,7 @@ public class SodiumExtraGameOptionPages {
                                 SystemAndGLInfo.getInstance().getOSVersion()))
                         .setTooltip(Text.translatable("sodium.options.pages.sysversion"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
@@ -284,7 +284,7 @@ public class SodiumExtraGameOptionPages {
                         .setName(Text.translatable("sodium.options.pages.jdkinfo"))
                         .setTooltip(Text.translatable("sodium.options.pages.jdkinfo"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .add(OptionImpl.createBuilder(boolean.class, sodiumExtraOpts)
@@ -292,7 +292,7 @@ public class SodiumExtraGameOptionPages {
                                 SystemAndGLInfo.getInstance().getJDKVersion()))
                         .setTooltip(Text.translatable("sodium.options.pages.jdkversion"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());
@@ -301,7 +301,7 @@ public class SodiumExtraGameOptionPages {
                         .setName(Text.translatable("sodium.options.pages.glinfo"))
                         .setTooltip(Text.translatable("sodium.options.pages.glinfo"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .add(OptionImpl.createBuilder(boolean.class, sodiumExtraOpts)
@@ -309,7 +309,7 @@ public class SodiumExtraGameOptionPages {
                                 SystemAndGLInfo.getInstance().getGLVersion()))
                         .setTooltip(Text.translatable("sodium.options.pages.glversion"))
                         .setControl(TickBoxControl::new)
-                        .setBinding((opts, value) -> SodiumExtraClientMod.caiDan(), opts -> true)
+                        .setBinding((opts, value) -> LSDCClientMod.caiDan(), opts -> true)
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .build())
                 .build());

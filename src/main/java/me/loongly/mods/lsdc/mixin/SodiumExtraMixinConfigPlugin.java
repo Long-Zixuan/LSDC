@@ -1,6 +1,6 @@
 package me.loongly.mods.lsdc.mixin;
 
-import me.loongly.mods.lsdc.client.SodiumExtraClientMod;
+import me.loongly.mods.lsdc.client.LSDCClientMod;
 import net.caffeinemc.caffeineconfig.AbstractCaffeineConfigMixinPlugin;
 import net.caffeinemc.caffeineconfig.CaffeineConfig;
 
@@ -10,7 +10,7 @@ public class SodiumExtraMixinConfigPlugin extends AbstractCaffeineConfigMixinPlu
 
     @Override
     protected CaffeineConfig createConfig() {
-        return SodiumExtraClientMod.mixinConfig();
+        return LSDCClientMod.mixinConfig();
     }
 
     @Override

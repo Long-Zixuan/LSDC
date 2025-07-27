@@ -12,13 +12,13 @@ version = "${project.mod_version}+mc${project.minecraft_version}-${getVersionMet
 group = project.maven_group
 
 loom {
-    accessWidenerPath = file("src/main/resources/sodium-extra.accesswidener")
+    accessWidenerPath = file("src/main/resources/lsdc.accesswidener")
 
     forge {
         convertAccessWideners = true
 
         mixinConfigs = [
-                "sodium-extra.mixins.json"
+                "lsdc.mixins.json"
         ]
     }
 }

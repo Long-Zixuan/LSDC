@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 import it.unimi.dsi.fastutil.objects.Object2BooleanArrayMap;
 import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
-import me.loongly.mods.lsdc.client.SodiumExtraClientMod;
+import me.loongly.mods.lsdc.client.LSDCClientMod;
 import me.jellysquid.mods.sodium.client.gui.options.TextProvider;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -20,7 +20,7 @@ import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Map;
 
-public class SodiumExtraGameOptions {
+public class LSDCGameOptions {
     private static final Gson gson = new GsonBuilder()
             .registerTypeAdapter(Identifier.class, new Identifier.Serializer())
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -36,18 +36,18 @@ public class SodiumExtraGameOptions {
     public boolean isSimpUI = false;
     private File file;
 
-    public static SodiumExtraGameOptions load(File file) {
-        SodiumExtraGameOptions config;
+    public static LSDCGameOptions load(File file) {
+        LSDCGameOptions config;
 
         if (file.exists()) {
             try (FileReader reader = new FileReader(file)) {
-                config = gson.fromJson(reader, SodiumExtraGameOptions.class);
+                config = gson.fromJson(reader, LSDCGameOptions.class);
             } catch (Exception e) {
-                SodiumExtraClientMod.LOGGER.error("Could not parse config, falling back to defaults!", e);
-                config = new SodiumExtraGameOptions();
+                LSDCClientMod.LOGGER.error("Could not parse config, falling back to defaults!", e);
+                config = new LSDCGameOptions();
             }
         } else {
-            config = new SodiumExtraGameOptions();
+            config = new LSDCGameOptions();
         }
 
         config.file = file;

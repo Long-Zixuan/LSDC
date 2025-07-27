@@ -1,17 +1,17 @@
 package me.loongly.mods.lsdc.client;
 
-import me.loongly.mods.lsdc.client.gui.SodiumExtraGameOptions;
+import me.loongly.mods.lsdc.client.gui.LSDCGameOptions;
 import net.caffeinemc.caffeineconfig.CaffeineConfig;
 import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-public class SodiumExtraClientMod {
+public class LSDCClientMod {
     public static final Logger LOGGER = LogManager.getLogger("Embeddium Device Check");
-    private static SodiumExtraGameOptions CONFIG;
+    private static LSDCGameOptions CONFIG;
     private static CaffeineConfig MIXIN_CONFIG;
 
-    public static SodiumExtraGameOptions options() {
+    public static LSDCGameOptions options() {
         if (CONFIG == null) {
             CONFIG = loadConfig();
         }
@@ -60,17 +60,17 @@ public class SodiumExtraClientMod {
                     .addMixinOption("sun_moon", true)
                     .addMixinOption("toasts", true)
 
-                    .withLogger(SodiumExtraClientMod.LOGGER)
+                    .withLogger(LSDCClientMod.LOGGER)
                     .withInfoUrl("https://github.com/FlashyReese/sodium-extra-fabric/wiki/Configuration-File")
                     .build(FMLPaths.CONFIGDIR.get().resolve("sodium-extra.properties"));
         }
         return MIXIN_CONFIG;
     }
 
-    private static SodiumExtraGameOptions loadConfig() {
-        return SodiumExtraGameOptions.load(FMLPaths.CONFIGDIR.get().resolve("sodium-device-check.json").toFile());
+    private static LSDCGameOptions loadConfig() {
+        return LSDCGameOptions.load(FMLPaths.CONFIGDIR.get().resolve("sodium-device-check.json").toFile());
     }
 
-    public SodiumExtraClientMod() {
+    public LSDCClientMod() {
     }
 }

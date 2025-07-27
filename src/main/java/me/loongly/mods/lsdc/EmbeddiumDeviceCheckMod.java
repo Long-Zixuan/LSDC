@@ -2,10 +2,10 @@ package me.loongly.mods.lsdc;
 
 import net.minecraftforge.fml.common.Mod;
 
-@Mod(EmbeddiumExtraMod.MOD_ID)
-public final class EmbeddiumExtraMod {
+@Mod(EmbeddiumDeviceCheckMod.MOD_ID)
+public final class EmbeddiumDeviceCheckMod {
     public static final String MOD_ID = "embeddium_device_check";
 
-    public EmbeddiumExtraMod() {
+    public EmbeddiumDeviceCheckMod() {
     }
 }
