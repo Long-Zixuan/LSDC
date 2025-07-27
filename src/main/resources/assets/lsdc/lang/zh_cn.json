@@ -30,5 +30,5 @@
   "sodium.options.pages.jdkinfo": "Java信息",
   "sodium.options.pages.jdkversion": "Java版本",
   "sodium.options.pages.simpleUI": "启用简化的UI",
-  "sodium.options.pages.simpleUITooltip": "如果您安装了“钠-扩展”或者“Reese的钠界面”模组，则可以开启此选项，如果未安装上述模组，开启此选项后信息将无法完全显示。该选项将在重新开启此界面时生效"
+  "sodium.options.pages.simpleUITooltip": "如果您安装了“铷-扩展”模组，则可以开启此选项，如果未安装上述模组，开启此选项后信息将无法完全显示。该选项将在重新开启此界面时生效"
 }

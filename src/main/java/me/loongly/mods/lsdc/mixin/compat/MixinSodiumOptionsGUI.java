@@ -29,10 +29,10 @@ public class MixinSodiumOptionsGUI {
         }
         else
         {
+            this.pages.add(LSDCGameOptionPages.softInfo());
             this.pages.add(LSDCGameOptionPages.cpuInfo());
             this.pages.add(LSDCGameOptionPages.gpuInfo());
             this.pages.add(LSDCGameOptionPages.memoryInfo());
-            this.pages.add(LSDCGameOptionPages.softInfo());
         }
     }
 }

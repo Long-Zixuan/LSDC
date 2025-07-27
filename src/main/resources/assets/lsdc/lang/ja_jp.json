@@ -30,5 +30,5 @@
   "sodium.options.pages.jdkinfo": "Java情報",
   "sodium.options.pages.jdkversion": "Javaバージョン",
   "sodium.options.pages.simpleUI": "簡略化UIを有効化",
-  "sodium.options.pages.simpleUITooltip": "「Sodium Extra」または「Reese's Sodium Options」モッドをインストールしている場合、このオプションを有効にできます。これらのモッドをインストールしていない場合、このオプションを有効にすると情報が完全に表示されません。このオプションは、この画面を再度開いた時に有効になります"
+  "sodium.options.pages.simpleUITooltip": "「Embeddium (Rubidium) Extra」モッドをインストールしている場合、このオプションを有効にできます。これらのモッドをインストールしていない場合、このオプションを有効にすると情報が完全に表示されません。このオプションは、この画面を再度開いた時に有効になります"
 }
