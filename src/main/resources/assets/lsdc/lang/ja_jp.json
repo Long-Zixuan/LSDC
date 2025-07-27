@@ -30,5 +30,5 @@
   "sodium.options.pages.jdkinfo": "Java情報",
   "sodium.options.pages.jdkversion": "Javaバージョン",
   "sodium.options.pages.simpleUI": "簡略化UIを有効化",
-  "sodium.options.pages.simpleUITooltip": "「Embeddium (Rubidium) Extra」モッドをインストールしている場合、このオプションを有効にできます。これらのモッドをインストールしていない場合、このオプションを有効にすると情報が完全に表示されません。このオプションは、この画面を再度開いた時に有効になります"
+  "sodium.options.pages.simpleUITooltip": " 「Embeddium (Rubidium) Extra」モッドまたは「TexTrue's Embeddium Options」モッドをインストールしている場合は、このオプションを有効にすることができます。上記のモッドをインストールしていない場合,このオプションを有効にした後,情報は完全に表示されません.このオプションは、このインターフェースを再開したときに有効になります。"
 }
