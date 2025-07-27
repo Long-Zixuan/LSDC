@@ -1,5 +1,6 @@
 package me.loongly.mods.lsdc.mixin.compat;
 
+import me.loongly.mods.lsdc.client.LSDCClientMod;
 import me.loongly.mods.lsdc.client.gui.LSDCGameOptionPages;
 import me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI;
 import me.jellysquid.mods.sodium.client.gui.options.OptionPage;
@@ -22,6 +23,16 @@ public class MixinSodiumOptionsGUI {
     @Inject(method = "<init>", at = @At("TAIL"))
     private void init(CallbackInfo info)
     {
-        this.pages.add(LSDCGameOptionPages.lsdc());
+        if(LSDCClientMod.options().isSimpUI)
+        {
+            this.pages.add(LSDCGameOptionPages.lsdc());
+        }
+        else
+        {
+            this.pages.add(LSDCGameOptionPages.cpuInfo());
+            this.pages.add(LSDCGameOptionPages.gpuInfo());
+            this.pages.add(LSDCGameOptionPages.memoryInfo());
+            this.pages.add(LSDCGameOptionPages.softInfo());
+        }
     }
 }
