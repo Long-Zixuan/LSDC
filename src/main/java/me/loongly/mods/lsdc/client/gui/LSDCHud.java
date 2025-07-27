@@ -25,68 +25,11 @@ public class LSDCHud {
 
     @SubscribeEvent
     public static void onStartTick(TickEvent.ClientTickEvent client) {
-        if (client.phase == TickEvent.Phase.END) {
-            return;
-        }
 
-        // Clear the textList to start fresh (this might not be ideal but hey it's still better than whatever the fuck debug hud is doing)
-        TEXT_LIST.clear();
-        if (LSDCClientMod.options().extraSettings.showFps) {
-            int currentFPS = 60;
-
-            Text text = Text.translatable("sodium-extra.overlay.fps", currentFPS);
-
-            if (LSDCClientMod.options().extraSettings.showFPSExtended)
-                text = Text.literal(String.format("%s %s", text.getString(), Text.translatable("sodium-extra.overlay.fps_extended", ClientTickHandler.getHighestFps(), ClientTickHandler.getAverageFps(),
-                        ClientTickHandler.getLowestFps()).getString()));
-
-            TEXT_LIST.add(text);
-        }
-
-        if (LSDCClientMod.options().extraSettings.showCoords && !CLIENT.hasReducedDebugInfo() && CLIENT.player != null) {
-            Vec3d pos = CLIENT.player.getPos();
-
-            Text text = Text.translatable("sodium-extra.overlay.coordinates", String.format("%.2f", pos.x), String.format("%.2f", pos.y), String.format("%.2f", pos.z));
-            TEXT_LIST.add(text);
-        }
-
-        if (!LSDCClientMod.options().renderSettings.lightUpdates) {
-            Text text = Text.translatable("sodium-extra.overlay.light_updates");
-            TEXT_LIST.add(text);
-        }
     }
     @SubscribeEvent
-    public static void onHudRender(RenderGuiEvent.Post event) {
-        if (!CLIENT.options.debugEnabled) {
-            LSDCGameOptions.OverlayCorner overlayCorner = LSDCClientMod.options().extraSettings.overlayCorner;
-            // Calculate starting position based on the overlay corner
-            int x;
-            int y = overlayCorner == LSDCGameOptions.OverlayCorner.BOTTOM_LEFT || overlayCorner == LSDCGameOptions.OverlayCorner.BOTTOM_RIGHT ?
-                    CLIENT.getWindow().getScaledHeight() - CLIENT.textRenderer.fontHeight - 2 : 2;
-            // Render each text in the list
-            for (Text text : TEXT_LIST) {
-                if (overlayCorner == LSDCGameOptions.OverlayCorner.TOP_RIGHT || overlayCorner == LSDCGameOptions.OverlayCorner.BOTTOM_RIGHT) {
-                    x = CLIENT.getWindow().getScaledWidth() - CLIENT.textRenderer.getWidth(text) - 2;
-                } else {
-                    x = 2;
-                }
-                drawString(event.getGuiGraphics(), text, x, y);
-                if (overlayCorner == LSDCGameOptions.OverlayCorner.BOTTOM_LEFT || overlayCorner == LSDCGameOptions.OverlayCorner.BOTTOM_RIGHT) {
-                    y -= CLIENT.textRenderer.fontHeight + 2;
-                } else {
-                    y += CLIENT.textRenderer.fontHeight + 2; // Increase the y-position for the next text
-                }
-            }
-        }
-    }
+    public static void onHudRender(RenderGuiEvent.Post event)
+    {
 
-    private static void drawString(DrawContext drawContext, Text text, int x, int y) {
-        int textColor = 0xffffffff; // Default text color
-
-        if (LSDCClientMod.options().extraSettings.textContrast == LSDCGameOptions.TextContrast.BACKGROUND) {
-            drawContext.fill(x - 1, y - 1, x + CLIENT.textRenderer.getWidth(text) + 1, y + CLIENT.textRenderer.fontHeight + 1, -1873784752);
-        }
-
-        drawContext.drawText(CLIENT.textRenderer, text, x, y, textColor, LSDCClientMod.options().extraSettings.textContrast == LSDCGameOptions.TextContrast.SHADOW);
     }
 }
