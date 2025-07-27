@@ -1,36 +1,34 @@
 modLoader = "javafml"
 loaderVersion = "*"
 license = "LGPLv3"
-issueTrackerURL = "https://github.com/dima-dencep/rubidium-extra/issues"
+issueTrackerURL = ""
 
 [[mods]]
 displayTest = "IGNORE_SERVER_VERSION"
-modId = "embeddium_extra"
+modId = "embeddium_device_check"
 version = "${version}"
-displayName = "Embeddium Extra"
+displayName = "Embeddium Device Check"
 logoFile = "icon.png"
-updateJSONURL = "https://api.modrinth.com/updates/rubidium-extra/forge_updates.json"
-authors = "dima_dencep, FlashyReese,LoongLy"
-credits = "AMereBagatelle, DragonEggBedrockBreaking, EatMyVenom, HarvelsX, Kichura, Madis0, Paint_Ninja"
-displayURL = "https://curseforge.com/minecraft/mc-mods/rubidium-extra"
-description = "Features that shouldn't be in Embeddium."
-provides = ["sodium-extra", "sodium_extra"]
+updateJSONURL = ""
+authors = "LoongLy"
+displayURL = ""
+description = "Embeddium device check"
 
-[[dependencies.embeddium_extra]]
+[[dependencies.embeddium_device_check]]
 modId = "forge"
 mandatory = true
 versionRange = "[47.1.3,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.embeddium_extra]]
+[[dependencies.embeddium_device_check]]
 modId = "embeddium"
 mandatory = true
 versionRange = "*"
 ordering = "NONE"
 side = "CLIENT"
 
-[[dependencies.embeddium_extra]]
+[[dependencies.embeddium_device_check]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.20.1,)"

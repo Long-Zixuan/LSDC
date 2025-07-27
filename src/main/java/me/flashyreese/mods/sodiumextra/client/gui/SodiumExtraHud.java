@@ -4,7 +4,6 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.flashyreese.mods.sodiumextra.EmbeddiumExtraMod;
 import me.flashyreese.mods.sodiumextra.client.ClientTickHandler;
 import me.flashyreese.mods.sodiumextra.client.SodiumExtraClientMod;
-import me.flashyreese.mods.sodiumextra.mixin.gui.MinecraftClientAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.text.Text;
@@ -33,7 +32,7 @@ public class SodiumExtraHud {
         // Clear the textList to start fresh (this might not be ideal but hey it's still better than whatever the fuck debug hud is doing)
         TEXT_LIST.clear();
         if (SodiumExtraClientMod.options().extraSettings.showFps) {
-            int currentFPS = MinecraftClientAccessor.getCurrentFPS();
+            int currentFPS = 60;
 
             Text text = Text.translatable("sodium-extra.overlay.fps", currentFPS);
 

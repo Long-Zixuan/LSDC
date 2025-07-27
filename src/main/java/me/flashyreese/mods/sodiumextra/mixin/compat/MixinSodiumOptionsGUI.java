@@ -20,12 +20,8 @@ public class MixinSodiumOptionsGUI {
     private List<OptionPage> pages;
 
     @Inject(method = "<init>", at = @At("TAIL"))
-    private void init(CallbackInfo info) {
+    private void init(CallbackInfo info)
+    {
         this.pages.add(SodiumExtraGameOptionPages.lsdc());
-        this.pages.add(SodiumExtraGameOptionPages.animation());
-        this.pages.add(SodiumExtraGameOptionPages.particle());
-        this.pages.add(SodiumExtraGameOptionPages.detail());
-        this.pages.add(SodiumExtraGameOptionPages.render());
-        this.pages.add(SodiumExtraGameOptionPages.extra());
     }
 }

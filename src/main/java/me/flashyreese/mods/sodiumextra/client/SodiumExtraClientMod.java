@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
 public class SodiumExtraClientMod {
-    public static final Logger LOGGER = LogManager.getLogger("Embeddium Extra");
+    public static final Logger LOGGER = LogManager.getLogger("Embeddium Device Check");
     private static SodiumExtraGameOptions CONFIG;
     private static CaffeineConfig MIXIN_CONFIG;
 
@@ -23,7 +23,7 @@ public class SodiumExtraClientMod {
 
     public static CaffeineConfig mixinConfig() {
         if (MIXIN_CONFIG == null) {
-            MIXIN_CONFIG = CaffeineConfig.builder("Sodium Extra").withSettingsKey("sodium-extra:options")
+            MIXIN_CONFIG = CaffeineConfig.builder("Sodium Device Check").withSettingsKey("sodium-extra:options")
                     .addMixinOption("adaptive_sync", true)
                     .addMixinOption("animation", true)
                     .addMixinOption("biome_colors", true)
@@ -68,7 +68,7 @@ public class SodiumExtraClientMod {
     }
 
     private static SodiumExtraGameOptions loadConfig() {
-        return SodiumExtraGameOptions.load(FMLPaths.CONFIGDIR.get().resolve("sodium-extra-options.json").toFile());
+        return SodiumExtraGameOptions.load(FMLPaths.CONFIGDIR.get().resolve("sodium-device-check.json").toFile());
     }
 
     public SodiumExtraClientMod() {

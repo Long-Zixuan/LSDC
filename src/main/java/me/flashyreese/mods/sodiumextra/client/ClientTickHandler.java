@@ -2,7 +2,6 @@ package me.flashyreese.mods.sodiumextra.client;
 
 import me.flashyreese.mods.sodiumextra.EmbeddiumExtraMod;
 import com.google.common.collect.EvictingQueue;
-import me.flashyreese.mods.sodiumextra.mixin.gui.MinecraftClientAccessor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -22,7 +21,7 @@ public class ClientTickHandler {
         if (event.phase == TickEvent.Phase.END)
             return;
 
-        final int currentFPS = MinecraftClientAccessor.getCurrentFPS();
+        final int currentFPS = 60;
         fpsQueue.add(currentFPS);
 
         final int[] fpsArray = fpsQueue.stream().mapToInt(Integer::intValue).toArray();
