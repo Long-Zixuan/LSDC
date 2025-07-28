@@ -1,0 +1,36 @@
+modLoader = "javafml"
+loaderVersion = "*"
+license = "LGPLv3"
+issueTrackerURL = "https://github.com/Long-Zixuan/LSDC/issues"
+
+[[mods]]
+displayTest = "IGNORE_SERVER_VERSION"
+modId = "rubidium_device_check"
+version = "${version}"
+displayName = "Rubidium Device Check"
+logoFile = "icon.png"
+updateJSONURL = ""
+authors = "LoongLy"
+displayURL = "https://modrinth.com/mod/sodium-device-check"
+description = "Rubidium Device Check is Sodium Device Check with Forge support"
+
+[[dependencies.rubidium_device_check]]
+modId = "forge"
+mandatory = true
+versionRange = "[47.1.3,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.rubidium_device_check]]
+modId = "rubidium"
+mandatory = true
+versionRange = "[0.7.1,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.rubidium_device_check]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,)"
+ordering = "NONE"
+side = "CLIENT"
