@@ -46,14 +46,7 @@ dependencies {
 	modImplementation "com.github.FlashyReese:reeses-sodium-options:${project.reeses_sodium_options}"
 
 	//modImplementation "com.github.oshi:oshi-core:${project.oshi_version}"
-	modCompileOnly group: 'com.github.oshi', name: 'oshi-core', version: '6.6.5'
-	modCompileOnly group:'org.slf4j',name: 'slf4j-api', version: '1.7.30'
-	modCompileOnly group:'net.java.dev.jna', name: 'jna', version: '5.15.0'
-	modCompileOnly group:'net.java.dev.jna', name: 'jna-platform', version: '5.15.0'
-	include group: 'com.github.oshi', name: 'oshi-core', version: '6.6.5'
-	include group:'org.slf4j',name: 'slf4j-api', version: '1.7.30'
-	include group:'net.java.dev.jna', name: 'jna', version: '5.15.0'
-	include group:'net.java.dev.jna', name: 'jna-platform', version: '5.15.0'
+	modImplementation group: 'com.github.oshi', name: 'oshi-core', version: '6.6.5'
 
 }
 
