@@ -17,6 +17,7 @@ import java.util.concurrent.*;
 
 public class SystemAndGLInfo
 {
+    //region Singleton
     private static SystemAndGLInfo instance = null;
 
     public static synchronized void initInstance()
@@ -42,6 +43,7 @@ public class SystemAndGLInfo
         }
         return instance;
     }
+    //endregion
 
     private RefMap<String,String> mobileSocPathNumberToSocNameMap;
     private RefMap<String,String> mobileGPUPathNumberToGPUNameMap;
@@ -70,7 +72,7 @@ public class SystemAndGLInfo
         return Collections.unmodifiableList(memoryInfoList);
     }
 
-    /*Memory Info */
+    //region Memory Info
 
     public double getJVMTotalMemory()
     {
@@ -146,8 +148,9 @@ public class SystemAndGLInfo
                 log.info("时钟频率：{} MHz", memory.getClockSpeed());*/
         }
     }
+    //endregion
 
-    /*GPU Info*/
+    //region GPU Info
 
     public static class GPUInfo
     {
@@ -218,8 +221,8 @@ public class SystemAndGLInfo
         }
         return pathNumber;
     }
-
-    /*CPU Info */
+    //endregion
+    //region CPU Info
     public static class CPUInfo
     {
         private String name;
@@ -310,8 +313,9 @@ public class SystemAndGLInfo
         }
         return pathNumber;
     }
+    //endregion
 
-    /*Software Info API*/
+    //region Software Info
 
     public String getJDKVersion()
     {
@@ -345,7 +349,9 @@ public class SystemAndGLInfo
     {
         return System.getProperty("os.version");
     }
+    //endregion
 
+    //region Other
     public boolean isUsingPojavLauncher() {
         if (System.getenv("POJAV_RENDERER") != null) {
             //System.out.println("Detected presence of environment variable POJAV_LAUNCHER, which seems to indicate we are running on Android");
@@ -378,6 +384,9 @@ public class SystemAndGLInfo
     private boolean isKnownAndroidPathFragment(String path) {
         return path.matches("/data/user/[0-9]+/net\\.kdt\\.pojavlaunch");
     }
+    //endregion
+
+    //region init
 
     private SystemAndGLInfo(int i)//有参构造函数的参数仅仅为了和无参构造函数区分，除此之外无意义（有参构造函数不能在一瞬间初始化完成所有类内成员）
     {
@@ -428,9 +437,10 @@ public class SystemAndGLInfo
         initMemoryInfo();
 
     }
+    //endregion
 
 }
 
 //LZX-Idea2023-2024-12-18-001
 //LZX completed this api at 2024-12-18  11；46
-//LoongLy Software 2025/07/16 Update
+//LoongLy Software 2025/08/05 Update
