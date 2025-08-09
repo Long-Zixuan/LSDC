@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "plugin": "me.loongly.mods.lsdc.mixin.LSDCMixinConfigPlugin",
+  "package": "me.loongly.mods.lsdc.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "compat.MixinSodiumOptionsGUI",
+    "compat.MixinTitleScreen"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
