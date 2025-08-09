@@ -40,9 +40,16 @@ public class LSDCClientMod
         return CONFIG;
     }
 
+    static int clickCount = 0;
     public static void caiDan()
     {
-        Util.getOperatingSystem().open("https://www.curseforge.com/minecraft/mc-mods/sodium-device-check");
+
+        clickCount++;
+        if(clickCount >= 10)
+        {
+            Util.getOperatingSystem().open("https://modrinth.com/user/LoongLy");
+            clickCount = 0;
+        }
     }
 
 
