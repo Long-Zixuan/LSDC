@@ -146,7 +146,7 @@ public class SystemAndGLInfo
                 log.info("时钟频率：{} MHz", memory.getClockSpeed());*/
         }
     }
-    //endregions
+    //endregion
 
     //region GPU Info
 
