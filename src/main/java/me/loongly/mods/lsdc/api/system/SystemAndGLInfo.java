@@ -17,6 +17,7 @@ import java.util.concurrent.*;
 
 public class SystemAndGLInfo
 {
+    //<editor-fold desc="Single">
     private static SystemAndGLInfo instance = null;
 
     public static synchronized void initInstance()
@@ -42,6 +43,7 @@ public class SystemAndGLInfo
         }
         return instance;
     }
+    //</editor-fold>
 
     private RefMap<String,String> mobileSocPathNumberToSocNameMap;
     private RefMap<String,String> mobileGPUPathNumberToGPUNameMap;
@@ -70,8 +72,7 @@ public class SystemAndGLInfo
         return Collections.unmodifiableList(memoryInfoList);
     }
 
-    //region Memory Info
-
+    //<editor-fold desc="Memory Info">
     public double getJVMTotalMemory()
     {
         Runtime runtime = Runtime.getRuntime();
@@ -146,9 +147,9 @@ public class SystemAndGLInfo
                 log.info("时钟频率：{} MHz", memory.getClockSpeed());*/
         }
     }
-    //endregion
+    //</editor-fold>
 
-    //region GPU Info
+    //<editor-fold desc="GPU Info">
 
     public static class GPUInfo
     {
@@ -219,9 +220,9 @@ public class SystemAndGLInfo
         }
         return pathNumber;
     }
-    //endregion
+    //</editor-fold>
 
-    //region CPU Info
+    //<editor-fold desc="CPU Info">
     public static class CPUInfo
     {
         private String name;
@@ -312,9 +313,9 @@ public class SystemAndGLInfo
         }
         return pathNumber;
     }
-    //endregions
+    //</editor-fold>
 
-    //region Software Info API
+    //<editor-fold desc="Software Info API">
 
     public String getJDKVersion()
     {
@@ -349,7 +350,7 @@ public class SystemAndGLInfo
         return System.getProperty("os.version");
     }
 
-    //endregion
+    //</editor-fold>
 
     public boolean isUsingPojavLauncher() {
         if (System.getenv("POJAV_RENDERER") != null) {
@@ -383,6 +384,7 @@ public class SystemAndGLInfo
     private boolean isKnownAndroidPathFragment(String path) {
         return path.matches("/data/user/[0-9]+/net\\.kdt\\.pojavlaunch");
     }
+    //<editor-fold desc="Init">
 
     private SystemAndGLInfo(int i)//有参构造函数的参数仅仅为了和无参构造函数区分，除此之外无意义（有参构造函数不能在一瞬间初始化完成所有类内成员）
     {
@@ -433,6 +435,7 @@ public class SystemAndGLInfo
         initMemoryInfo();
 
     }
+    //</editor-fold>
 
 }
 
