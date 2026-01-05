@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import me.loongly.mods.lsdc.common.client.options.LSDCOptions;
 
-
 public class LSDCClientMod
 {
 
@@ -24,5 +23,16 @@ public class LSDCClientMod
 		LOGGER.info("[LSDC] LoongLy:Sodium Device Check init!");
 	}
 
-	public static void caiDan(boolean v){}
+	static int chickCount = 0;
+	public static void caiDan(boolean v)
+	{
+		System.out.println("Do Nothing");
+		chickCount++;
+		if (chickCount == 10)
+		{
+			chickCount = 0;
+			net.minecraft.util.Util.getPlatform()
+					.openUri("https://github.com/Long-Zixuan");
+		}
+	}
 }
