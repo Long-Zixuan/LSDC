@@ -3,7 +3,7 @@
   "id": "lsdc",
   "version": "${version}",
   "name": "Sodium Device Check",
-  "description": "钠-设备检查",
+  "description": "A minecraft mod can check you hardware and software",
   "authors": [
     {
       "name": "LoongLy",
@@ -13,9 +13,9 @@
     }
   ],
   "contact": {
-    "homepage": "https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack",
-    "issues": "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package//issues",
-    "sources": "https://github.com/Long-Zixuan/Sodium_Chinese_Localization_Package/"
+    "homepage": "https://modrinth.com/mod/sodium-device-check",
+    "issues": "https://github.com/Long-Zixuan/LSDC/issues",
+    "sources": "https://github.com/Long-Zixuan/LSDC/"
   },
   "icon": "icon.png",
   "license": "MIT",
@@ -38,8 +38,8 @@
         "id": "sodium"
       },
       "links": {
-        "modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/sodium-chinese-localization-package1-16-x",
-        "modmenu.modrinth": "https://modrinth.com/mod/mc1.16.5-sodium-chinese-localization-pack"
+        "modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/sodium-device-check",
+        "modmenu.modrinth": "https://modrinth.com/mod/sodium-device-check"
       }
     }
   },
