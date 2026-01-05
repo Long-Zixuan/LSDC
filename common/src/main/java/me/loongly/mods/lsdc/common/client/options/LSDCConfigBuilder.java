@@ -32,7 +32,7 @@ public class LSDCConfigBuilder implements ConfigEntryPoint
                         .setBaseThemeRGB(0xed65ff)
                 )
                 .setIcon(Identifier.parse("lsdc:icon.png"))
-                .setVersion("5.0.0")
+                .setVersion("5.0.1")
                 .addPage(configBuilder.createOptionPage()
                         .setName(Component.translatable("sodium.options.pages.lsdc"))
                         .addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:sys_info"))
@@ -92,12 +92,6 @@ public class LSDCConfigBuilder implements ConfigEntryPoint
                 .addPage(
                         configBuilder.createOptionPage()
                         .setName(Component.translatable("sodium.options.pages.cpuinfo"))
-                        .addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:cpu_info"))
-                                .setName(Component.translatable("sodium.options.pages.cpuinfo"))
-                                .setTooltip(Component.translatable("sodium.options.pages.cpuinfo"))
-                                .setBinding((value) -> LSDCClientMod.caiDan(value), () -> true)
-                                .setStorageHandler(lsdcOpts::save)
-                                .setDefaultValue(true))
                         .addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:cpu_name"))
                                 .setName(Component.translatable(SystemAndGLInfo.getInstance().getCpuInfo().getName()))
                                 .setTooltip(Component.translatable("sodium.cpuInfo.name"))
@@ -155,17 +149,10 @@ public class LSDCConfigBuilder implements ConfigEntryPoint
     {
         var gpuInfoGroup = configBuilder.createOptionPage()
                         .setName(Component.translatable("sodium.options.pages.gpuinfo"));
-        gpuInfoGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:gpu_info"))
-                .setName(Component.translatable("sodium.options.pages.gpuinfo"))
-                .setTooltip(Component.translatable("sodium.options.pages.gpuinfo"))
-                .setBinding((value) -> LSDCClientMod.caiDan(value), () -> true)
-                //   .setImpact(OptionImpact.LOW)
-                .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                .setStorageHandler(lsdcOpts::save)
-                .setDefaultValue(true));
         for(Integer i = 0 ; i < SystemAndGLInfo.getInstance().getGpuInfoList().size() ; i++)
         {
-                gpuInfoGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:gpu_info" + i.toString()))
+                var optGroup = configBuilder.createOptionGroup();
+                optGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:gpu_info" + i.toString()))
                         .setName(Component.translatable("sodium.gpu")
                         .append(Component.literal(" "+Integer.toString(i + 1))))
                         .setTooltip(Component.translatable(" "))
@@ -174,7 +161,7 @@ public class LSDCConfigBuilder implements ConfigEntryPoint
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .setStorageHandler(lsdcOpts::save)
                         .setDefaultValue(true));
-                gpuInfoGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:gpu_name" + i.toString()))
+                optGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:gpu_name" + i.toString()))
                         .setName(Component.translatable(SystemAndGLInfo.getInstance().getGpuInfoList().get(i).getName()))
                         .setTooltip(Component.translatable("sodium.gpuInfo.name"))
                         .setBinding((value) -> LSDCClientMod.caiDan(value), () -> true)
@@ -182,7 +169,7 @@ public class LSDCConfigBuilder implements ConfigEntryPoint
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .setStorageHandler(lsdcOpts::save)
                         .setDefaultValue(true));
-                gpuInfoGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:gpu_vendor" + i.toString()))
+                optGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:gpu_vendor" + i.toString()))
                         .setName(buildInfoComponent("sodium.hardware.vendor",
                                     SystemAndGLInfo.getInstance().getGpuInfoList().get(i).getVendor()))
                         .setTooltip(Component.translatable("sodium.hardware.vendor"))
@@ -191,7 +178,7 @@ public class LSDCConfigBuilder implements ConfigEntryPoint
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .setStorageHandler(lsdcOpts::save)
                         .setDefaultValue(true));
-                gpuInfoGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:gpu_vram" + i.toString()))
+                optGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:gpu_vram" + i.toString()))
                         .setName(buildInfoComponent("sodium.gpuInfo.vram",String.format("%.2f",
                                             SystemAndGLInfo.getInstance().getGpuInfoList().get(i).getVRam())+"GB"))
                         .setTooltip(Component.translatable("sodium.gpuInfo.vram"))
@@ -200,6 +187,7 @@ public class LSDCConfigBuilder implements ConfigEntryPoint
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .setStorageHandler(lsdcOpts::save)
                         .setDefaultValue(true));
+                gpuInfoGroup.addOptionGroup(optGroup);
         }
         return gpuInfoGroup;
     }
@@ -208,13 +196,6 @@ public class LSDCConfigBuilder implements ConfigEntryPoint
     {
         var memoryInfoGroup = configBuilder.createOptionPage()
                         .setName(Component.translatable("sodium.options.pages.memoryInfo"));
-        memoryInfoGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:memory_info"))
-                .setName(Component.translatable("sodium.options.pages.memoryInfo"))
-                .setTooltip(Component.translatable("sodium.options.pages.memoryInfo"))
-                .setBinding((value) -> LSDCClientMod.caiDan(value), () -> true)
-                .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
-                .setStorageHandler(lsdcOpts::save)
-                .setDefaultValue(true));
         memoryInfoGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:memory_name"))
                 .setName(Component.translatable("sodium.memoryInfo.jvmTol"))
                 .setTooltip(Component.translatable("sodium.memoryInfo.name"))
@@ -232,7 +213,8 @@ public class LSDCConfigBuilder implements ConfigEntryPoint
                 .setDefaultValue(true));
          for(Integer i = 0 ; i < SystemAndGLInfo.getInstance().getMemoryInfoList().size() ; i++)
         {
-                 memoryInfoGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:memory" + i.toString()))
+                var optGroup = configBuilder.createOptionGroup();
+                optGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:memory" + i.toString()))
                         .setName(Component.translatable("sodium.memnory")
                                     .append(Component.literal(" "+Integer.toString(i + 1))))
                         .setTooltip(Component.translatable(" "))
@@ -240,7 +222,7 @@ public class LSDCConfigBuilder implements ConfigEntryPoint
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .setStorageHandler(lsdcOpts::save)
                         .setDefaultValue(true));
-                memoryInfoGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:memory_name" + i.toString()))
+                optGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:memory_name" + i.toString()))
                         .setName(Component.translatable(SystemAndGLInfo.getInstance().getMemoryInfoList().get(i).getName()) )
                         .setTooltip(Component.translatable("sodium.memoryInfo.name"))
                         .setBinding((value) -> LSDCClientMod.caiDan(value), () -> true)
@@ -248,7 +230,7 @@ public class LSDCConfigBuilder implements ConfigEntryPoint
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .setStorageHandler(lsdcOpts::save)
                         .setDefaultValue(true));
-                memoryInfoGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:memory_vendor" + i.toString()))
+                optGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:memory_vendor" + i.toString()))
                         .setName(buildInfoComponent("sodium.hardware.vendor",
                                     SystemAndGLInfo.getInstance().getMemoryInfoList().get(i).getVendor()))
                         .setTooltip(Component.translatable("sodium.hardware.vendor"))
@@ -256,7 +238,7 @@ public class LSDCConfigBuilder implements ConfigEntryPoint
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .setStorageHandler(lsdcOpts::save)
                         .setDefaultValue(true));
-                memoryInfoGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:memory_size" + i.toString()))
+                optGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:memory_size" + i.toString()))
                         .setName(buildInfoComponent("sodium.memoryInfo.size",
                                     String.format("%.2f", SystemAndGLInfo.getInstance().getMemoryInfoList().get(i).getSize()) +"MB"))
                         .setTooltip(Component.translatable("sodium.memoryInfo.size"))
@@ -264,7 +246,7 @@ public class LSDCConfigBuilder implements ConfigEntryPoint
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .setStorageHandler(lsdcOpts::save)
                         .setDefaultValue(true));
-                 memoryInfoGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:memory_clock_speed" + i.toString()))
+                 optGroup.addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:memory_clock_speed" + i.toString()))
                         .setName(buildInfoComponent("sodium.memoryInfo.clockSpeed",
                                     String.format("%.2f", SystemAndGLInfo.getInstance().getMemoryInfoList().get(i).getClockSpeed())+"GHz"))
                         .setTooltip(Component.translatable("sodium.memoryInfo.clockSpeed"))
@@ -272,6 +254,7 @@ public class LSDCConfigBuilder implements ConfigEntryPoint
                         .setFlags(OptionFlag.REQUIRES_RENDERER_RELOAD)
                         .setStorageHandler(lsdcOpts::save)
                         .setDefaultValue(true));
+                memoryInfoGroup.addOptionGroup(optGroup);
         }
         
         return memoryInfoGroup;
