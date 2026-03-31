@@ -14,7 +14,7 @@ val PARCHMENT_VERSION by extra { null }
 // https://semver.org/
 val MAVEN_GROUP by extra { "me.loongly.mods" }
 val ARCHIVE_NAME by extra { "lsdc" }
-val MOD_VERSION by extra { "5.0.1" }
+val MOD_VERSION by extra { "5.0.2" }
 val SODIUM_VERSION by extra { "0.8.1+mc1.21.11" }
 
 allprojects {

@@ -32,7 +32,7 @@ public class LSDCConfigBuilder implements ConfigEntryPoint
                         .setBaseThemeRGB(0xed65ff)
                 )
                 .setIcon(Identifier.parse("lsdc:icon.png"))
-                .setVersion("5.0.1")
+                .setVersion("5.0.2")
                 .addPage(configBuilder.createOptionPage()
                         .setName(Component.translatable("sodium.options.pages.lsdc"))
                         .addOption(configBuilder.createBooleanOption(Identifier.parse("lsdc:sys_info"))
