@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.loongly.mods.lsdc.common.mixin",
+  "refmap": "lsdc.refmap.json",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
