@@ -1,10 +1,10 @@
-package me.loongly.mods.sclp.neoforge.services;
+package me.loongly.mods.lsdc.neoforge.services;
 
 import net.neoforged.fml.loading.FMLPaths;
 
-import me.loongly.mods.sclp.common.services.IPlatformHelper;
-
 import java.nio.file.Path;
+
+import me.loongly.mods.lsdc.common.services.IPlatformHelper;
 
 
 public class NeoForgePlatformHelper implements IPlatformHelper 

@@ -3,27 +3,27 @@ loaderVersion = "*"
 license = "MIT"
 
 [[mods]]
-modId = "sclp"
+modId = "lsdc"
 
 version = "${version}"
-displayName = "Sodium Chinese Localized Package"
+displayName = "Sodium Device Check"
 
-logoFile = "icon.png" #optional
+logoFile = "assets/icon.png" #optional
 
 authors = "LoongLy"
 
 description = '''
-钠（Sodium）模组汉化包
+A minecraft mod can check you hardware and software
 '''
 
-[[dependencies.sclp]]
+[[dependencies.lsdc]]
 modId = "minecraft"
 type = "required"
 versionRange = "[26.1,)"
 ordering = "NONE"
 side = "CLIENT"
 
-[[dependencies.sclp]]
+[[dependencies.lsdc]]
 modId = "sodium"
 type = "required"
 versionRange = "[0.8.7,)"
@@ -31,7 +31,7 @@ ordering = "NONE"
 side = "CLIENT"
 
 [[mixins]]
-config = "sclp.mixins.json"
+config = "lsdc.mixins.json"
 
-[modproperties.sclp]
-"sodium:config_api_user" = "me.loongly.mods.sclp.common.client.options.SCLPConfigBuilder"
+[modproperties.lsdc]
+"sodium:config_api_user" = "me.loongly.mods.lsdc.common.client.options.LSDCConfigBuilder"
