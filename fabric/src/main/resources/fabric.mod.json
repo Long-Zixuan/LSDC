@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "lsdc",
+  "version": "${version}",
+  "name": "Sodium Device Check",
+  "description": "A minecraft mod can check you hardware and software",
+  "authors": [
+    {
+      "name": "LoongLy",
+      "contact": {
+        "homepage": "https://github.com/Long-Zixuan"
+      }
+    }
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/sodium-device-check",
+    "issues": "https://github.com/Long-Zixuan/LSDC/issues",
+    "sources": "https://github.com/Long-Zixuan/LSDC/"
+  },
+  "icon": "icon.png",
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "me.loongly.mods.lsdc.fabric.client.LSDCFabricClientMod"
+    ],
+    "sodium:config_api_user": [
+      "me.loongly.mods.lsdc.common.client.options.LSDCConfigBuilder"
+    ]
+  },
+  "mixins": [
+    "lsdc.mixins.json"
+  ],
+  "accessWidener" : "lsdc.accesswidener",
+  "custom": {
+    "modmenu": {
+      "parent": {
+        "id": "sodium"
+      },
+      "links": {
+        "modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/sodium-device-check",
+        "modmenu.modrinth": "https://modrinth.com/mod/sodium-device-check",
+        "modmenu.github_releases": "https://github.com/Long-Zixuan/LSDC/releases",
+        "modmenu.donate": "https://ifdian.net/a/loongly",
+        "modmenu.kofi": "https://ko-fi.com/loongly",
+        "modmenu.discord": "https://discord.gg/rVbEMwzFFg"
+      }
+    }
+  },
+  "depends": {
+    "minecraft": ">=1.21",
+    "sodium": ">=0.8.1"
+  }
+}

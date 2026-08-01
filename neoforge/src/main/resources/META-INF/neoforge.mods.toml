@@ -1,0 +1,37 @@
+modLoader = "javafml"
+loaderVersion = "*"
+license = "MIT"
+
+[[mods]]
+modId = "lsdc"
+
+version = "${version}"
+displayName = "Sodium Device Check"
+
+logoFile = "assets/icon.png" #optional
+
+authors = "LoongLy"
+
+description = '''
+A minecraft mod can check you hardware and software
+'''
+
+[[dependencies.lsdc]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.lsdc]]
+modId = "sodium"
+type = "required"
+versionRange = "[0.8.1,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[mixins]]
+config = "lsdc.mixins.json"
+
+[modproperties.lsdc]
+"sodium:config_api_user" = "me.loongly.mods.lsdc.common.client.options.LSDCConfigBuilder"
